@@ -15,7 +15,7 @@ public class Airport{
     private String cityName, country;
 
     @Column( nullable = false, length = 10)
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "flightplan")
+    @OneToMany
     private List<FlightPlan> iATAairports;
 
 
