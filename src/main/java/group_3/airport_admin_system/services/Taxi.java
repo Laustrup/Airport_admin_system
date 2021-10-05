@@ -10,28 +10,24 @@ public class Taxi {
     private FlightPlanRepository fpRepo;
     private GateRepository gRepo;
 
-    /*
-
-    Needs to check if size of flight fits gatesize.
-
-
-     */
-
     public Taxi(FlightPlanRepository fpRepo, GateRepository gRepo) {
-        this.fpRepo = fpRepo;
-        this.gRepo = gRepo;
-    }
+            this.fpRepo = fpRepo;
+            this.gRepo = gRepo;
+        }
 
     // Moves an airplane to the correct (open) gate
     public boolean movePlaneToGate(int gateNumber, String routeNumber) {
 
         // Get infos from db such as gate and flightPlan from parameters
-        FlightPlan flightPlan = fpRepo.findFlightPlanBy(routeNumber);
-        Gate gate = gRepo.findGateBy(gateNumber);
+        List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
+        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
+
+        FlightPlan flightPlan = flightPlans.get(0);
+        Gate gate = gates.get(0);
 
         // Is gate available, otherwise prompt for new (open)  gatenumber
-        if (!gate.isOccupied()) {
-            //
+        if (!gate.isOccupied() && gate.getSize() >= flightPlans.size()) {
+            flightPlan.setGateInfo("Taxing to gate " + gateNumber);
             taxi(gate,flightPlan);
             return true;
         }
@@ -48,8 +44,6 @@ public class Taxi {
         gate.changeOccupiedStatus();
         gRepo.save(gate);
 
-        // Delete flight_plan
-        fpRepo.delete(flightPlan);
     }
 
 }

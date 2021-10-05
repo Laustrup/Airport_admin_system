@@ -9,15 +9,16 @@ public class Gate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int gateNumber;
+    private int gateNumber,size;
     private boolean isOccupied;
 
     public Gate(){
 
     }
 
-    public Gate(int gateNumber, boolean isOccupied) {
+    public Gate(int gateNumber, int size, boolean isOccupied) {
         this.gateNumber = gateNumber;
+        this.size = size;
         this.isOccupied = isOccupied;
     }
 
@@ -34,5 +35,9 @@ public class Gate {
             isOccupied = false;
         }
         isOccupied = true;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

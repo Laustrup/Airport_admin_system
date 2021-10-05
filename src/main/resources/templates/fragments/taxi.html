@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<!-- Type routenumber -->
+    <body>
+        <main>
+            
+            <form action="/gatemanaging/taxi" method="post">
 
-<!-- Provide gate number for open gate. Tower get's a list of open gates and clicks a button on the gate the flight goes to. -->
+                <label for="route_number">Type routenumber</label>
+                <input type="text" id="route_number" name="route_number" required>
 
-<!-- Submit button (Gate closed) -->
+                <h4>Available gates</h4>
+                <ul th:each="${gate : gates}">
+                    <li><button type="submit" value="gate.getGateNumber" name="gate_number"><p th:text="${gate.getGateNumber}"></p></button></li>
+                </ul>
 
-</body>
+            </form>
+
+        </main>
+    </body>
 </html>
