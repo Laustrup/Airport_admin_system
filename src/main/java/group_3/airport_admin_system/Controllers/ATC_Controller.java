@@ -10,10 +10,26 @@ import java.awt.*;
 public class ATC_Controller {
 
 
-    @GetMapping("/")
+    @GetMapping("/allGatesInformation")
     public ResponseEntity<List> getGateInformation(){
         //List<Gate> allGates = new ArrayList();
         //atcService.getAllGateInformation().findAll().forEach(gate -> allGates.add(gate));
+        //return ResponseEntity.status(HttpStatus.OK).body(new );
+        return null;
+    }
+
+    @GetMapping("/allAircraftsInformation")
+    public ResponseEntity<List> getAircraftInformation(){
+        //List<Gate> allGates = new ArrayList();
+        //atcService.getAllAircraftsInformation().findAll().forEach(gate -> allGates.add(gate));
+        //return ResponseEntity.status(HttpStatus.OK).body(new );
+        return null;
+    }
+
+    @GetMapping("/allTaxingAircrafts")
+    public ResponseEntity<List> getTaxingAircraftsInformation(){
+        //List<Gate> allGates = new ArrayList();
+        //atcService.getAllAircraftsInformation().findAll().forEach(gate -> allGates.add(gate));
         //return ResponseEntity.status(HttpStatus.OK).body(new );
         return null;
     }
