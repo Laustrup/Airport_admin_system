@@ -21,15 +21,17 @@ public class FlightPlan {
     //private LocalDate date; ?
     private Date date;
 
-    @Column( nullable = false)
+    @Column( nullable = false, length = 10)
     private int routeNumber;
 
     @Column( nullable = false)
     private Time time;
 
+    @Column( nullable = false, length = 10)
     @ManyToOne
     private AircraftType aircraftType;
 
+    @Column( nullable = false, length = 10)
     @ManyToOne
     private Airport airport;
 

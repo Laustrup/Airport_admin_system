@@ -10,10 +10,10 @@ public class AircraftType {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false )
+    @Column( nullable = false)
     private String ICAOcode, model;
 
-    @Column( nullable = false )
+    @Column( nullable = false, length = 1)
     private Wakecategory wake;
 
 
