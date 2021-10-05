@@ -3,7 +3,6 @@ package group_3.airport_admin_system.services;
 import group_3.airport_admin_system.model.AircraftType;
 import group_3.airport_admin_system.model.FlightPlan;
 import group_3.airport_admin_system.model.Gate;
-import group_3.airport_admin_system.model.Wakecategory;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import java.util.List;
@@ -55,20 +54,24 @@ public class Taxi {
         int aircraftSize = 0;
 
         switch (gate.getWake()) {
-            case s: gateSize = 1;
-            break;
-            case m: gateSize = 2;
-            break;
-            case l: gateSize = 3;
-            break;
+            case LIGHT: gateSize = 1;
+                break;
+            case MEDIUM: gateSize = 2;
+                break;
+            case HEAVY: gateSize = 3;
+                break;
+            case SUPER: gateSize = 4;
+                break;
         }
 
         switch (aircraftType.getWake()) {
-            case s: aircraftSize = 1;
+            case LIGHT: aircraftSize = 1;
                 break;
-            case m: aircraftSize = 2;
+            case MEDIUM: aircraftSize = 2;
                 break;
-            case l: aircraftSize = 3;
+            case HEAVY: aircraftSize = 3;
+                break;
+            case SUPER: aircraftSize = 4;
                 break;
         }
 

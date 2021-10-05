@@ -13,15 +13,18 @@ public class Gate {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1)
     private Wakecategory wake;
 
     @Column( nullable = false)
     private boolean isAvailable;
 
-
     public Gate(){ }
 
+
+    public Long getId() {
+        return id;
+    }
 
     public Wakecategory getWake() {
         return wake;

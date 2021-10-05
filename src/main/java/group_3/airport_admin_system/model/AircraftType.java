@@ -1,6 +1,7 @@
 package group_3.airport_admin_system.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table( name = "aircraft_types")
@@ -10,22 +11,45 @@ public class AircraftType {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false )
-    private String ICAOcode, model;
+    @Column( nullable = false)
+    private String iCAOcode, model;
 
-    @Column( nullable = false )
+    @OneToMany
+    private List<FlightPlan> iATAAirport;
+
+    @Column( nullable = false, length = 1)
     private Wakecategory wake;
 
 
     public AircraftType(){ }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getiCAOcode() {
+        return iCAOcode;
+    }
+
+    public List<FlightPlan> getiATAAirport() {
+        return iATAAirport;
+    }
+
+    public void setiCAOcode(String iCAOcode) {
+        this.iCAOcode = iCAOcode;
+    }
+
+    public void setiATAAirport(List<FlightPlan> iATAAirport) {
+        this.iATAAirport = iATAAirport;
+    }
+
     public String getICAOcode() {
-        return ICAOcode;
+        return iCAOcode;
     }
 
     public void setICAOcode(String ICAOcode) {
-        this.ICAOcode = ICAOcode;
+        this.iCAOcode = ICAOcode;
     }
 
     public String getModel() {
