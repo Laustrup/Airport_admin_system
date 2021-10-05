@@ -1,21 +1,20 @@
 package group_3.airport_admin_system.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "airports")
 public class Airport{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private String IATAcode, model, wake;
 
     public Airport(){ }
+
+    
 
 }
