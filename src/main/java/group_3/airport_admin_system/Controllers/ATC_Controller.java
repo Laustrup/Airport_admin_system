@@ -14,23 +14,23 @@ public class ATC_Controller {
     public ResponseEntity<List> getGateInformation(){
         //List<Gate> allGates = new ArrayList();
         //atcService.getAllGateInformation().findAll().forEach(gate -> allGates.add(gate));
-        //return ResponseEntity.status(HttpStatus.OK).body(new );
+        //return ResponseEntity.status(HttpStatus.OK).body(allGates);
         return null;
     }
 
     @GetMapping("/allAircraftsInformation")
     public ResponseEntity<List> getAircraftInformation(){
-        //List<Gate> allGates = new ArrayList();
-        //atcService.getAllAircraftsInformation().findAll().forEach(gate -> allGates.add(gate));
-        //return ResponseEntity.status(HttpStatus.OK).body(new );
+        //List<Gate> allaircraftInformation = new ArrayList();
+        //atcService.getAllAircraftsInformation().findAll().forEach(aircraftinformation -> allAircraftInformation.add(aircraftinformation));
+        //return ResponseEntity.status(HttpStatus.OK).body(allaircraftInformation);
         return null;
     }
 
     @GetMapping("/allTaxingAircrafts")
     public ResponseEntity<List> getTaxingAircraftsInformation(){
-        //List<Gate> allGates = new ArrayList();
-        //atcService.getAllAircraftsInformation().findAll().forEach(gate -> allGates.add(gate));
-        //return ResponseEntity.status(HttpStatus.OK).body(new );
+        //List<Gate> allTaxingAircraftInformation = new ArrayList();
+        //atcService.getAllAircraftsInformation().findAll().forEach(taxingAircraftInformation -> allTaxingAircraftInformation.add(taxingAircraftInformation));
+        //return ResponseEntity.status(HttpStatus.OK).body(allTaxingAircraftInformation);
         return null;
     }
 
