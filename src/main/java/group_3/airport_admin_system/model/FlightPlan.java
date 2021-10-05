@@ -1,6 +1,8 @@
 package group_3.airport_admin_system.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -27,12 +29,16 @@ public class FlightPlan {
     @Column( nullable = false)
     private Time time;
 
+    @JsonIgnore
     @Column( nullable = false, length = 10)
     @ManyToOne
+    @JoinColumn( name = "aircraft_type_id")
     private AircraftType aircraftType;
 
+    @JsonIgnore
     @Column( nullable = false, length = 10)
     @ManyToOne
+    @JoinColumn( name = "airport_id")
     private Airport airport;
 
 

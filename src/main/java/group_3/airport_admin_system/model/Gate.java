@@ -19,7 +19,6 @@ public class Gate {
     @Column( nullable = false)
     private boolean isAvailable;
 
-
     public Gate(){ }
 
 

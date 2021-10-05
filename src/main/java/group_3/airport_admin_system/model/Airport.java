@@ -1,6 +1,7 @@
 package group_3.airport_admin_system.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "airports")
@@ -12,6 +13,10 @@ public class Airport{
 
     @Column(nullable = false)
     private String cityName, country;
+
+    @Column( nullable = false, length = 10)
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "flightplan")
+    private List<FlightPlan> iATAairports;
 
     public Airport(){ }
 
