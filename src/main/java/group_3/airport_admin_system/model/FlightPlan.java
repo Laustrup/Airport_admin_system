@@ -29,6 +29,9 @@ public class FlightPlan {
     @Column( nullable = false)
     private Time time;
 
+    @Column( nullable = true , length = 255)
+    private String gateInfo;
+
     @JsonIgnore
     @Column( nullable = false, length = 10)
     @ManyToOne
@@ -44,6 +47,26 @@ public class FlightPlan {
 
     public FlightPlan(){ }
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public Airport getOrigin() {
+        return origin;
+    }
+
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setOrigin(Airport origin) {
+        this.origin = origin;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
+    }
 
     public Date getDate() {
         return date;
@@ -83,5 +106,13 @@ public class FlightPlan {
 
     public void setAirport(Airport airport) {
         this.airport = airport;
+    }
+
+    public String getGateInfo() {
+        return gateInfo;
+    }
+
+    public void setGateInfo(String gateInfo) {
+        this.gateInfo = gateInfo;
     }
 }

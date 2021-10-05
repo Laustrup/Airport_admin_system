@@ -24,6 +24,26 @@ public class AircraftType {
     public AircraftType(){ }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getiCAOcode() {
+        return iCAOcode;
+    }
+
+    public List<FlightPlan> getiATAAirport() {
+        return iATAAirport;
+    }
+
+    public void setiCAOcode(String iCAOcode) {
+        this.iCAOcode = iCAOcode;
+    }
+
+    public void setiATAAirport(List<FlightPlan> iATAAirport) {
+        this.iATAAirport = iATAAirport;
+    }
+
     public String getICAOcode() {
         return iCAOcode;
     }

@@ -22,6 +22,10 @@ public class Gate {
     public Gate(){ }
 
 
+    public Long getId() {
+        return id;
+    }
+
     public Wakecategory getWake() {
         return wake;
     }
