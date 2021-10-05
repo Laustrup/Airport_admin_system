@@ -1,7 +1,8 @@
 package group_3.airport_admin_system.model;
 
 public enum Wakecategory {
-    S,
-    M,
-    H
+    LIGHT,
+    MEDIUM,
+    HEAVY,
+    SUPER
 }
