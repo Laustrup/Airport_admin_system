@@ -23,7 +23,7 @@ class TaxiTest {
 
     @ParameterizedTest
     @CsvSource(value = "27|D8 3563|Taxing to gate 27|false", delimiter = '|')
-    public void movePlaneToGate(int gateNumber, String routeNumber,
+    public void movePlaneToGateTest(int gateNumber, String routeNumber,
                                 String expectedGateInfo,boolean expectedAvailability) {
         // Arrange
         Taxi taxi = new Taxi(fpRepo,gRepo);
