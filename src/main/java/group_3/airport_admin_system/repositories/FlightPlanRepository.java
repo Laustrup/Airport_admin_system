@@ -1,6 +1,6 @@
 package group_3.airport_admin_system.repositories;
 
-import group_3.airport_admin_system.models.FlightPlan;
+import group_3.airport_admin_system.model.FlightPlan;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
