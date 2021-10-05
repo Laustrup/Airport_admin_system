@@ -1,7 +1,7 @@
 package group_3.airport_admin_system.services;
 
-import group_3.airport_admin_system.models.FlightPlan;
-import group_3.airport_admin_system.models.Gate;
+import group_3.airport_admin_system.model.FlightPlan;
+import group_3.airport_admin_system.model.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class Taxi {
         Gate gate = gRepo.findGateBy(gateNumber);
 
         // Is gate available, otherwise prompt for new (open)  gatenumber
-        if (!gate.isOccupied()) {
+        if (gate.isAvailable()) {
             //
             taxi(gate,flightPlan);
             return true;
@@ -47,7 +47,7 @@ public class Taxi {
         fpRepo.save(flightPlan);
 
         // Change gate availability to occupied
-        gate.changeOccupiedStatus();
+        gate.setAvailable(false);
         gRepo.save(gate);
 
         // Delete flight_plan

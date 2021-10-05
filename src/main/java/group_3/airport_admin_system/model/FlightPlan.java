@@ -1,6 +1,5 @@
 package group_3.airport_admin_system.model;
 
-
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
