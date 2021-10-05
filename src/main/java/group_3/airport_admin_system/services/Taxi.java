@@ -5,6 +5,8 @@ import group_3.airport_admin_system.model.FlightPlan;
 import group_3.airport_admin_system.model.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Taxi {
@@ -21,8 +23,8 @@ public class Taxi {
     public boolean movePlaneToGate(int gateNumber, String routeNumber) {
 
         // Get infos from db such as gate and flightPlan from parameters
-        List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
-        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
+        ArrayList<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
+        ArrayList<Gate> gates = gRepo.findById(gateNumber);
 
         FlightPlan flightPlan = flightPlans.get(0);
         Gate gate = gates.get(0);
