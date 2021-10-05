@@ -35,7 +35,7 @@ class TaxiTest {
         taxi.movePlaneToGate(gateNumber,routeNumber);
 
         List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
-        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
+        List<Gate> gates = gRepo.findById(gateNumber);
 
         // Assert
         assertEquals(expectedGateInfo,flightPlans.get(0).getGateInfo());

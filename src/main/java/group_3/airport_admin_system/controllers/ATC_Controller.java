@@ -14,7 +14,7 @@ public class ATC_Controller {
     // Endpoint(/gatemanaging/)
     @GetMapping("/gatemanaging")
     public String renderTaxiHtml(){
-        return "taxi.html";
+        return "taxi";
     }
 
      // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
