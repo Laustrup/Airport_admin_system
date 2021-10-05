@@ -29,7 +29,7 @@ public class ATC_Controller {
     @GetMapping("/allTaxingAircrafts")
     public ResponseEntity<List> getTaxingAircraftsInformation(){
         //List<Gate> allTaxingAircraftInformation = new ArrayList();
-        //atcService.getAllAircraftsInformation().findAll().forEach(taxingAircraftInformation -> allTaxingAircraftInformation.add(taxingAircraftInformation));
+        //atcService.getAllTaxingAircraftsInformation().findAll().forEach(taxingAircraftInformation -> allTaxingAircraftInformation.add(taxingAircraftInformation));
         //return ResponseEntity.status(HttpStatus.OK).body(allTaxingAircraftInformation);
         return null;
     }
