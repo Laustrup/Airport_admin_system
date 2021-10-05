@@ -4,6 +4,7 @@ import group_3.airport_admin_system.models.FlightPlan;
 import group_3.airport_admin_system.models.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
+import java.util.List;
 
 public class Taxi {
 
