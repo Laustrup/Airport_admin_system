@@ -1,2 +1,4 @@
-package group_3.airport_admin_system.model;public enum Wakecategory {
+package group_3.airport_admin_system.model;
+
+public enum Wakecategory {
 }

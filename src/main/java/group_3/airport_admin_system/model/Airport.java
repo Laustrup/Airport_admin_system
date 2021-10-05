@@ -10,11 +10,25 @@ public class Airport{
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String IATAcode, model, wake;
+    @Column(nullable = false)
+    private String cityName, country;
 
     public Airport(){ }
 
-    
 
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }
