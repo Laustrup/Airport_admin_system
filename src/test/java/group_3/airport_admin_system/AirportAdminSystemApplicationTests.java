@@ -8,6 +8,7 @@ class AirportAdminSystemApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
