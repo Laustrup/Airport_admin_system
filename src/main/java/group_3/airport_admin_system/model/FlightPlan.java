@@ -27,6 +27,8 @@ public class FlightPlan {
     @Column( nullable = false)
     private Time time;
 
+    private String gateInfo;
+
     @ManyToOne
     private AircraftType aircraftType;
 
@@ -75,5 +77,13 @@ public class FlightPlan {
 
     public void setAirport(Airport airport) {
         this.airport = airport;
+    }
+
+    public String getGateInfo() {
+        return gateInfo;
+    }
+
+    public void setGateInfo(String gateInfo) {
+        this.gateInfo = gateInfo;
     }
 }

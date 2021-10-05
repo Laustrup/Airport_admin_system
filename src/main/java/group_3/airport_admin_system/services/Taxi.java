@@ -1,7 +1,9 @@
 package group_3.airport_admin_system.services;
 
+import group_3.airport_admin_system.model.AircraftType;
 import group_3.airport_admin_system.model.FlightPlan;
 import group_3.airport_admin_system.model.Gate;
+import group_3.airport_admin_system.model.Wakecategory;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Taxi {
         Gate gate = gates.get(0);
 
         // Is gate available, otherwise prompt for new (open)  gatenumber
-        if (!gate.isOccupied() && gate.getSize() >= flightPlans.size()) {
+        if (gate.isAvailable() && isGateWakeBigger(gate,flightPlan.getAircraftType())) {
             flightPlan.setGateInfo("Taxing to gate " + gateNumber);
             taxi(gate,flightPlan);
             return true;
@@ -42,9 +44,35 @@ public class Taxi {
         fpRepo.save(flightPlan);
 
         // Change gate availability to occupied
-        gate.changeOccupiedStatus();
+        gate.setAvailable(false);
         gRepo.save(gate);
 
+    }
+
+    private boolean isGateWakeBigger(Gate gate, AircraftType aircraftType) {
+
+        int gateSize = 0;
+        int aircraftSize = 0;
+
+        switch (gate.getWake()) {
+            case s: gateSize = 1;
+            break;
+            case m: gateSize = 2;
+            break;
+            case l: gateSize = 3;
+            break;
+        }
+
+        switch (aircraftType.getWake()) {
+            case s: aircraftSize = 1;
+                break;
+            case m: aircraftSize = 2;
+                break;
+            case l: aircraftSize = 3;
+                break;
+        }
+
+        return gateSize >= aircraftSize;
     }
 
 }
