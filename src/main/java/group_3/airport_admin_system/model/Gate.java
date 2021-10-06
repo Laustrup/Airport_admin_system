@@ -17,7 +17,6 @@ public class Gate {
 
     public Gate(){ }
 
-
     public int getGateNumber() {
         return gateNumber;
     }

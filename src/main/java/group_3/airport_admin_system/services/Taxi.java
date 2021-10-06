@@ -5,14 +5,17 @@ import group_3.airport_admin_system.model.FlightPlan;
 import group_3.airport_admin_system.model.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class Taxi {
 
     private FlightPlanRepository fpRepo;
     private GateRepository gRepo;
+
+    public Taxi(){}
 
     public Taxi(FlightPlanRepository fpRepo, GateRepository gRepo) {
             this.fpRepo = fpRepo;
@@ -23,8 +26,8 @@ public class Taxi {
     public boolean movePlaneToGate(int gateNumber, String routeNumber) {
 
         // Get infos from db such as gate and flightPlan from parameters
-        ArrayList<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
-        ArrayList<Gate> gates = gRepo.findById(gateNumber);
+        List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
+        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
 
         FlightPlan flightPlan = flightPlans.get(0);
         Gate gate = gates.get(0);
