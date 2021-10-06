@@ -1,8 +1,5 @@
 package group_3.airport_admin_system.model;
 
-
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +7,7 @@ import javax.persistence.*;
 public class Gate {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int gateNumber;
 
     @Column(nullable = false, length = 1)
     private Wakecategory wake;
@@ -21,9 +17,8 @@ public class Gate {
 
     public Gate(){ }
 
-
-    public Long getId() {
-        return id;
+    public int getGateNumber() {
+        return gateNumber;
     }
 
     public Wakecategory getWake() {
