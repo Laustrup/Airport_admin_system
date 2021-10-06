@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,8 +30,8 @@ public class TaxiTest {
      */
 
     @ParameterizedTest
-    @CsvSource(value = "27|1|Taxing to gate 27|false", delimiter = '|')
-    public void movePlaneToGateTest(int gateNumber, int flightPlanId, String expectedGateInfo, boolean expectedAvailability) {
+    @CsvSource(value = "26|1|Taxiing to gate 26|false", delimiter = '|')
+    public void movePlaneToGateTest(Long gateNumber, Long flightPlanId, String expectedGateInfo, boolean expectedAvailability) {
 
         // Arrange
         Taxi taxi = new Taxi(fpRepo,gRepo);
@@ -41,12 +42,13 @@ public class TaxiTest {
         // Act
         taxi.movePlaneToGate(gateNumber,flightPlanId);
 
-        FlightPlan flightPlan = fpRepo.findById(flightPlanId);
-        Gate gate = gRepo.findById(gateNumber);
+        Optional<FlightPlan> flightPlan = fpRepo.findById(flightPlanId);
+        Optional<Gate> gate = gRepo.findById(gateNumber);
 
         // Assert
-        assertEquals(expectedGateInfo,flightPlan.getGateInfo());
-        assertEquals(expectedAvailability,gate.isAvailable());
+        if (flightPlan.isPresent() && gate.isPresent()){
+        assertEquals(expectedGateInfo,flightPlan.get().getGateInfo());
+        assertEquals(expectedAvailability,gate.get().isAvailable());
     }
-
+    }
 }

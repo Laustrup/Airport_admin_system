@@ -35,13 +35,13 @@ public class FlightPlan {
     @JsonIgnore
   //  @Column( nullable = false, length = 10)
     @ManyToOne
-    @JoinColumn( name = "aircraft_type_id")
+    @JoinColumn( name = "aircraft")
     private AircraftType aircraftType;
 
     @JsonIgnore
     //@Column( nullable = false, length = 10)
     @ManyToOne
-    @JoinColumn( name = "airport_id")
+    @JoinColumn( name = "airport")
     private Airport airport;
 
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Optional;
 
 @RestController
 public class ATC_Controller {
@@ -47,7 +48,7 @@ public class ATC_Controller {
 
     // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
     @PutMapping("/flightplans/{id}")
-    public String taxiing(@PathVariable (name = "id") int id, @RequestParam (name = "gate_number") int gateNumber){
+    public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
 
         Taxi taxi = new Taxi();
 
@@ -57,7 +58,7 @@ public class ATC_Controller {
     }
 
     @GetMapping("/flightplans{id}")
-    public ResponseEntity<FlightPlan> renderFlightplans(@PathVariable(name="id") int id) {
+    public ResponseEntity<Optional<FlightPlan>> renderFlightplans(@PathVariable(name="id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(flightPlanRepository.findById(id));
     }
 

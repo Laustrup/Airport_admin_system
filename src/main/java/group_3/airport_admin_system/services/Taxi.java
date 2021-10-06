@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Taxi {
@@ -24,16 +25,16 @@ public class Taxi {
         }
 
     // Moves an airplane to the correct (open) gate
-    public boolean movePlaneToGate(int gateNumber, int id) {
+    public boolean movePlaneToGate(Long gateNumber, Long id) {
 
         // Get infos from db such as gate and flightPlan from parameters
 
-            FlightPlan flightPlan = fpRepo.findById(id);
-            Gate gate = gRepo.findById(gateNumber);
+            Optional<FlightPlan> flightPlan = fpRepo.findById(id);
+            Optional<Gate> gate = gRepo.findById(gateNumber);
 
             // Is gate available, otherwise prompt for new (open)  gatenumber
-            if (gate.isAvailable() && isGateWakeBigger(gate,flightPlan.getAircraftType())) {
-                flightPlan.setGateInfo("Taxing to gate " + gateNumber);
+            if (gate.get().isAvailable() && isGateWakeBigger(gate.get(), flightPlan.get().getAircraftType())) {
+                flightPlan.get().setGateInfo("Taxing to gate " + gateNumber);
                 taxi(gate,flightPlan);
                 return true;
             }
@@ -42,15 +43,14 @@ public class Taxi {
     }
 
     // Allows the plane to taxi
-    private void taxi(Gate gate, FlightPlan flightPlan) {
+    private void taxi(Optional<Gate> gate, Optional<FlightPlan> flightPlan) {
 
-        // Put aircraftType in airport db.
-        fpRepo.save(flightPlan);
-
-        // Change gate availability to occupied
-        gate.setAvailable(false);
-        gRepo.save(gate);
-
+        // Put aircraftType in airport db. + // Change gate availability to occupied
+        if (flightPlan.isPresent() && gate.isPresent()) {
+            fpRepo.save(flightPlan.get());
+            gate.get().setAvailable(false);
+            gRepo.save(gate.get());
+        }
     }
 
     private boolean isGateWakeBigger(Gate gate, AircraftType aircraftType) {

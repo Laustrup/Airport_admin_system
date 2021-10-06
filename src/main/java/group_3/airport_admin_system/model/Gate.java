@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Gate {
 
     @Id
-    private int gateNumber;
+    private Long gateNumber;
 
     @Column(nullable = false, length = 1)
     private Wakecategory wake;
@@ -17,7 +17,7 @@ public class Gate {
 
     public Gate(){ }
 
-    public int getGateNumber() {
+    public Long getGateNumber() {
         return gateNumber;
     }
 
