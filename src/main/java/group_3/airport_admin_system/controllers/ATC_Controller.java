@@ -1,45 +1,56 @@
 package group_3.airport_admin_system.controllers;
 
+import group_3.airport_admin_system.model.Gate;
+import group_3.airport_admin_system.repositories.GateRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 @RestController
 public class ATC_Controller {
+//TODO:
+//Brug ResponseEntity i stedet for String.
+// Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
+    private GateRepository gateRepository;
 
+    public ATC_Controller(GateRepository gateRepository){
+        this.gateRepository = gateRepository;
+    }
 
-   // Getmapping for rendering taxi.html
-    // Endpoint(/gatemanaging/)
     @GetMapping("/gates")
-    public String renderTaxiHtml(){
-        return "taxi";
+    public ResponseEntity<ArrayList<Gate>> renderTaxiHtml(Model model){
+
+        return ResponseEntity.status(HttpStatus.OK).body(gateRepository.findById(0));
     }
 
      // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
     // Endpoint(/gatemanaging/taxi)
-    @PostMapping("/gatemanaging/taxi")
+    @PostMapping("/gates/taxi")
     public String gateManagingTaxi(@RequestParam (name = "route_number") String routeNumber,
-                                   @RequestParam (name = "gate_number") int gateNumber){
+                                                                  @RequestParam (name = "gate_number") int gateNumber){
 
-        if (2 < 1) {
-            return "redirect:/gatemanaging/succes_taxi/" + gateNumber;
+        if (2 < 1 /* bare for at der ikke er fejl. Der skal lægges noget ind som checker efter åben gate og dirigerer flyet derhen. */) {
+            return "redirect:/gates/succes_taxi/" + gateNumber;
         }
         else{
-            return "redirect:/gatemanaging/failure_taxi/" + gateNumber;
+            return "redirect:/gates/failure_taxi/" + gateNumber;
         }
     }
 
     // Getmapping for succes or failure of taxi
     // Endpoint(/gatemanaging/succes)
-    @GetMapping("/gatemanaging/succes_taxi/gate_number")
+    @GetMapping("/gates/succes_taxi/gate_number")
     public String succesTaxi(@PathVariable ("gate_number") int gateNumber){
         return "succes_taxi.html";
     }
 
     // Endpoint(/gatemanaging/failure)
-    @GetMapping("/gatemanaging/failure_taxi/gate_number")
+    @GetMapping("/gates/failure_taxi/gate_number")
     public String failureTaxi(@PathVariable ("gate_number") int gateNumber){
         return "failure_taxi.html";
     }
