@@ -13,11 +13,11 @@ public class FlightPlan {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="iata_origin_airport", nullable = false)
+    @JoinColumn(name="iata_origin", nullable = false)
     private Airport origin;
 
     @ManyToOne
-    @JoinColumn(name="iata_destination_airport", nullable = false)
+    @JoinColumn(name="iata_destination", nullable = false)
     private Airport destination;
 
     @Column(name="date", nullable = false)
