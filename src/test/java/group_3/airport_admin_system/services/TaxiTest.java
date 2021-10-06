@@ -29,9 +29,9 @@ public class TaxiTest {
      */
 
     @ParameterizedTest
-    @CsvSource(value = "27|D8 3563|Taxing to gate 27|false", delimiter = '|')
-    public void movePlaneToGateTest(int gateNumber, String routeNumber,
-                                String expectedGateInfo,boolean expectedAvailability) {
+    @CsvSource(value = "27|1|Taxing to gate 27|false", delimiter = '|')
+    public void movePlaneToGateTest(int gateNumber, int flightPlanId, String expectedGateInfo, boolean expectedAvailability) {
+
         // Arrange
         Taxi taxi = new Taxi(fpRepo,gRepo);
         if (expectedGateInfo.equals("null")) {
@@ -39,14 +39,14 @@ public class TaxiTest {
         }
 
         // Act
-        taxi.movePlaneToGate(gateNumber,routeNumber);
+        taxi.movePlaneToGate(gateNumber,flightPlanId);
 
-        List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
-        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
+        FlightPlan flightPlan = fpRepo.findById(flightPlanId);
+        Gate gate = gRepo.findById(gateNumber);
 
         // Assert
-        assertEquals(expectedGateInfo,flightPlans.get(0).getGateInfo());
-        assertEquals(expectedAvailability,gates.get(0).isAvailable());
+        assertEquals(expectedGateInfo,flightPlan.getGateInfo());
+        assertEquals(expectedAvailability,gate.isAvailable());
     }
 
 }
