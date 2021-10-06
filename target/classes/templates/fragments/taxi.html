@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <body>
+        <main>
+            
+            <form action="/gatemanaging/taxi" method="post">
+
+                <label for="route_number">Type routenumber</label>
+                <input type="text" id="route_number" name="route_number" required>
+
+                <h4>Available gates</h4>
+                <ul th:each="${gate : gates}">
+                    <li><button type="submit" value="gate.getGateNumber" name="gate_number"><p th:text="${gate.getGateNumber}"></p></button></li>
+                </ul>
+
+            </form>
+
+        </main>
+    </body>
+</html>
