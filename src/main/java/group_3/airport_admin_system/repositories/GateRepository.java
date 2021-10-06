@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface GateRepository extends CrudRepository<Gate,Long> {
 
-    public Gate findGateBy(int GateNumber);
+    //public Gate findGateBy(int GateNumber);
 
 }

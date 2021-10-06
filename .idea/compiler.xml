@@ -9,12 +9,9 @@
         <module name="Airport_admin_system" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
     <bytecodeTargetLevel>
       <module name="Airport_admin_system" target="11" />
     </bytecodeTargetLevel>
-=======
->>>>>>> origin/master
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

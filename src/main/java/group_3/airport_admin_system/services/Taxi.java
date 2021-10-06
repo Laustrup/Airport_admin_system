@@ -25,11 +25,11 @@ public class Taxi {
     }
 
     // Moves an airplane to the correct (open) gate
-    public boolean movePlaneToGate(int gateNumber, String routeNumber) {
+    public boolean movePlaneToGate(Long gateNumber, Long id) {
 
         // Get infos from db such as gate and flightPlan from parameters
-        FlightPlan flightPlan = fpRepo.findFlightPlanBy(routeNumber);
-        Gate gate = gRepo.findGateBy(gateNumber);
+        FlightPlan flightPlan = fpRepo.findById(id).orElse(null);
+        Gate gate = gRepo.findById(gateNumber).orElse(null);
 
         // Is gate available, otherwise prompt for new (open)  gatenumber
         if (gate.isAvailable()) {

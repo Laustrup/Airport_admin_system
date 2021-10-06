@@ -1,39 +1,53 @@
 package group_3.airport_admin_system.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table( name = "aircraft_types")
 public class AircraftType {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="iata_aircraft")
+    private String id;
 
-    @Column( nullable = false )
-    private String ICAOcode, model;
+    @Column(name="icao_code")
+    private String ICAOCode;
 
-    @Column( nullable = false )
+    @Column(name="model_name", nullable = false )
+    private String modelName;
+
+    @OneToMany(mappedBy = "aircraftType")
+    private List<FlightPlan> flightPlans;
+
+    @Column(name="wake_category", nullable = false )
     private Wakecategory wake;
 
 
     public AircraftType(){ }
 
-
-    public String getICAOcode() {
-        return ICAOcode;
+    public String getId() {
+        return id;
     }
 
-    public void setICAOcode(String ICAOcode) {
-        this.ICAOcode = ICAOcode;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getModel() {
-        return model;
+    public String getICAOCode() {
+        return ICAOCode;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setICAOCode(String ICAOCode) {
+        this.ICAOCode = ICAOCode;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
     public Wakecategory getWake() {
@@ -43,5 +57,4 @@ public class AircraftType {
     public void setWake(Wakecategory wake) {
         this.wake = wake;
     }
-
 }

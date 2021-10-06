@@ -1,17 +1,28 @@
 package group_3.airport_admin_system.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "airports")
 public class Airport{
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private String cityName, country;
+    @Column(name="city_name")
+    private String cityName;
+
+    @Column(name="country")
+    private String country;
+
+    @Id
+    @Column(name="iata_airport")
+    private String id;
+
+    @OneToMany(mappedBy = "origin")
+    private List<FlightPlan> flightPlansAsOrigin;
+
+    @OneToMany(mappedBy = "destination")
+    private List<FlightPlan> flightPlansAsDestination;
 
     public Airport(){ }
 
