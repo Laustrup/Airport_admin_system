@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface GateRepository extends CrudRepository<Gate,Long> {
 
-    ArrayList<Gate> findById(int gateNumber);
+    ArrayList<Gate> findById(long gateNumber);
 
 }
