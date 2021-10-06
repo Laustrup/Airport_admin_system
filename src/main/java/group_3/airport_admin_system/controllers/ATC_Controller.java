@@ -12,7 +12,7 @@ public class ATC_Controller {
 
    // Getmapping for rendering taxi.html
     // Endpoint(/gatemanaging/)
-    @GetMapping("/gatemanaging")
+    @GetMapping("/gates")
     public String renderTaxiHtml(){
         return "taxi";
     }
@@ -21,7 +21,7 @@ public class ATC_Controller {
     // Endpoint(/gatemanaging/taxi)
     @PostMapping("/gatemanaging/taxi")
     public String gateManagingTaxi(@RequestParam (name = "route_number") String routeNumber,
-                                                                  @RequestParam (name = "gate_number") int gateNumber){
+                                   @RequestParam (name = "gate_number") int gateNumber){
 
         if (2 < 1) {
             return "redirect:/gatemanaging/succes_taxi/" + gateNumber;

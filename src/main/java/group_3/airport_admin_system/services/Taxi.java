@@ -7,6 +7,7 @@ import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,21 +24,20 @@ public class Taxi {
         }
 
     // Moves an airplane to the correct (open) gate
-    public boolean movePlaneToGate(int gateNumber, String routeNumber) {
+    public boolean movePlaneToGate(int gateNumber, int id) {
 
         // Get infos from db such as gate and flightPlan from parameters
-        List<FlightPlan> flightPlans = fpRepo.findByRouteNumber(routeNumber);
-        List<Gate> gates = gRepo.findByGateNumber(gateNumber);
 
-        FlightPlan flightPlan = flightPlans.get(0);
-        Gate gate = gates.get(0);
+            FlightPlan flightPlan = fpRepo.findById(id);
+            Gate gate = gRepo.findById(gateNumber);
 
-        // Is gate available, otherwise prompt for new (open)  gatenumber
-        if (gate.isAvailable() && isGateWakeBigger(gate,flightPlan.getAircraftType())) {
-            flightPlan.setGateInfo("Taxing to gate " + gateNumber);
-            taxi(gate,flightPlan);
-            return true;
-        }
+            // Is gate available, otherwise prompt for new (open)  gatenumber
+            if (gate.isAvailable() && isGateWakeBigger(gate,flightPlan.getAircraftType())) {
+                flightPlan.setGateInfo("Taxing to gate " + gateNumber);
+                taxi(gate,flightPlan);
+                return true;
+            }
+
         return false;
     }
 
