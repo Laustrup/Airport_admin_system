@@ -24,7 +24,7 @@ public class FlightPlan {
     private Date date;
 
     @Column( nullable = false, length = 10)
-    private int routeNumber;
+    private String routeNumber;
 
     @Column( nullable = false)
     private Time time;
@@ -76,11 +76,11 @@ public class FlightPlan {
         this.date = date;
     }
 
-    public int getRouteNumber() {
+    public String getRouteNumber() {
         return routeNumber;
     }
 
-    public void setRouteNumber(int routeNumber) {
+    public void setRouteNumber(String routeNumber) {
         this.routeNumber = routeNumber;
     }
 
