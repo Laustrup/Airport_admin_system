@@ -2,8 +2,6 @@ package group_3.airport_admin_system.controllers;
 
 import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
-import group_3.airport_admin_system.repositories.FlightRepository;
-import group_3.airport_admin_system.repositories.GateRepository;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +17,17 @@ public class ATC_Controller {
 //Brug ResponseEntity i stedet for String.
 // Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
-   // private GateRepository gateRepository;
-   // private FlightRepository flightRepository;
+
    Taxi taxi;
-    public ATC_Controller(GateRepository gateRepository, FlightRepository flightRepository, Taxi taxi){
+    public ATC_Controller(Taxi taxi){
         this.taxi = taxi;
-        //this.gateRepository = gateRepository;
-       // this.flightRepository = flightRepository;
+
 
 
     }
 
     @GetMapping("/gates")
-    public ResponseEntity<Model> rendergates(Model model){
+    public ResponseEntity<List<Gate>> rendergates(Model model){
 
         Iterable<Gate> gates = taxi.gateRepository().findAll();
         LinkedList<Gate> availableGates = new LinkedList<>();
@@ -44,7 +40,8 @@ public class ATC_Controller {
 
         model.addAttribute("gates",availableGates);
 
-        return ResponseEntity.ok(model);
+        //return ResponseEntity.ok(model);
+        return ResponseEntity.status(HttpStatus.OK).body(availableGates);
     }
 
     // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info

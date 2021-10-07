@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Table(name="flight_plans")
+@Table(name="flights")
 public class Flight {
 
     @Id

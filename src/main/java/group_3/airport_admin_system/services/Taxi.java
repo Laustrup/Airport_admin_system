@@ -29,7 +29,7 @@ public class Taxi {
     }
 
     public GateRepository gateRepository(){
-        return gateRepository();
+        return gRepo;
     }
 
     // Moves an airplane to the correct (open) gate
