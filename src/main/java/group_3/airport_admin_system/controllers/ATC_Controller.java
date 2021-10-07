@@ -48,9 +48,9 @@ public class ATC_Controller {
     @PutMapping("/flightplans/{id}")
     public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
 
-        Taxi taxi = new Taxi();
+        //Taxi taxi = new Taxi();
 
-        taxi.movePlaneToGate(gateNumber,id);
+        //taxi.movePlaneToGate(gateNumber,id);
 
         return "redirect:/gates";
     }
