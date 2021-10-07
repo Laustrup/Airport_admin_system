@@ -46,8 +46,8 @@ public class TaxiTest {
 
         // Assert
         if (flightPlan.isPresent() && gate.isPresent()){
-       // assertEquals(expectedGateInfo,flightPlan.get().getGateInfo());
-        assertEquals(expectedAvailability,gate.get().isAvailable());
+            assertEquals(expectedGateInfo,flightPlan.get().getGateInfo());
+            assertEquals(expectedAvailability,gate.get().isAvailable());
         }
     }
 }
