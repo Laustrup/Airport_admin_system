@@ -3,6 +3,7 @@ package group_3.airport_admin_system.model;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="flight_plans")
@@ -31,6 +32,12 @@ public class FlightPlan {
 
     @ManyToOne
     private Airport airport;
+
+    //TODO: skal checkes om den lapper over på tabel
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "checklists")
+    @JoinColumn( name = "checklistId")
+    private List<Checklist> checklist;
+
 
 
     public FlightPlan(){ }
