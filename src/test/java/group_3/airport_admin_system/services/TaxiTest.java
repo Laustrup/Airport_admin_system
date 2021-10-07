@@ -29,14 +29,12 @@ public class TaxiTest {
      */
 
     @ParameterizedTest
-    @CsvSource(value = "26|1|Taxiing to gate 26|false", delimiter = '|')
-    public void movePlaneToGateTest(Long gateNumber, Long flightPlanId, String expectedGateInfo, boolean expectedAvailability) {
+    @CsvSource(value = "26|1|false", delimiter = '|')
+    public void movePlaneToGateTest(Long gateNumber, Long flightPlanId, boolean expectedAvailability) {
 
         // Arrange
         Taxi taxi = new Taxi(fpRepo,gRepo);
-        if (expectedGateInfo.equals("null")) {
-            expectedGateInfo = null;
-        }
+
 
         // Act
         taxi.movePlaneToGate(gateNumber,flightPlanId);
@@ -46,7 +44,6 @@ public class TaxiTest {
 
         // Assert
         if (flightPlan.isPresent() && gate.isPresent()){
-            assertEquals(expectedGateInfo,flightPlan.get().getGateInfo());
             assertEquals(expectedAvailability,gate.get().isAvailable());
         }
     }
