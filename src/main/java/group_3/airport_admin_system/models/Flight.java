@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="flight_plans")
-public class FlightPlan {
+public class Flight {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -45,7 +45,7 @@ public class FlightPlan {
     @JoinColumn(name="iata_aircraft", nullable = false)
     private AircraftType aircraftType;
 
-    public FlightPlan(){ }
+    public Flight(){ }
 
     public Long getId() {
         return id;

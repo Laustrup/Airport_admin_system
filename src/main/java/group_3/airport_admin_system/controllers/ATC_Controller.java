@@ -1,8 +1,8 @@
 package group_3.airport_admin_system.controllers;
 
-import group_3.airport_admin_system.models.FlightPlan;
+import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
-import group_3.airport_admin_system.repositories.FlightPlanRepository;
+import group_3.airport_admin_system.repositories.FlightRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
@@ -19,18 +19,21 @@ public class ATC_Controller {
 //Brug ResponseEntity i stedet for String.
 // Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
-    private GateRepository gateRepository;
-    private FlightPlanRepository flightPlanRepository;
+   // private GateRepository gateRepository;
+   // private FlightRepository flightRepository;
+   Taxi taxi;
+    public ATC_Controller(GateRepository gateRepository, FlightRepository flightRepository, Taxi taxi){
+        this.taxi = taxi;
+        //this.gateRepository = gateRepository;
+       // this.flightRepository = flightRepository;
 
-    public ATC_Controller(GateRepository gateRepository, FlightPlanRepository flightPlanRepository){
-        this.gateRepository = gateRepository;
-        this.flightPlanRepository = flightPlanRepository;
+
     }
 
     @GetMapping("/gates")
     public ResponseEntity<Model> rendergates(Model model){
 
-        Iterable<Gate> gates = gateRepository.findAll();
+        Iterable<Gate> gates = taxi.gateRepository().findAll();
         LinkedList<Gate> availableGates = new LinkedList<>();
 
         for (Gate gate : gates) {
@@ -48,22 +51,22 @@ public class ATC_Controller {
     @PutMapping("/flightplans/{id}")
     public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
 
-        //Taxi taxi = new Taxi();
 
-        //taxi.movePlaneToGate(gateNumber,id);
+
+        taxi.movePlaneToGate(gateNumber,id);
 
         return "redirect:/gates";
     }
 
     @GetMapping("/flightplans")
-    public ResponseEntity<List<FlightPlan>> renderFlightplans() {
+    public ResponseEntity<List<Flight>> renderFlightplans() {
 
-        Iterable<FlightPlan> flightPlans = flightPlanRepository.findAll();
-        LinkedList<FlightPlan> listOfFlightPlans = new LinkedList<>();
-        for (FlightPlan flightplan : flightPlans) {
-            listOfFlightPlans.add(flightplan);
+        Iterable<Flight> flightPlans = taxi.flightRepository().findAll();
+        LinkedList<Flight> listOfFlights = new LinkedList<>();
+        for (Flight flightplan : flightPlans) {
+            listOfFlights.add(flightplan);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(listOfFlightPlans);
+        return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
     }
 
 
