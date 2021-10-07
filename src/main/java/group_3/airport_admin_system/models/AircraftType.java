@@ -18,7 +18,7 @@ public class AircraftType {
     private String modelName;
 
     @OneToMany(mappedBy = "aircraftType")
-    private List<FlightPlan> flightPlans;
+    private List<Flight> flightPlans;
 
     @Column(name="wake_category", nullable = false )
     private Wakecategory wake;

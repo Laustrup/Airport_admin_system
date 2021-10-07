@@ -19,10 +19,10 @@ public class Airport{
     private String id;
 
     @OneToMany(mappedBy = "origin")
-    private List<FlightPlan> flightPlansAsOrigin;
+    private List<Flight> flightPlansAsOrigin;
 
     @OneToMany(mappedBy = "destination")
-    private List<FlightPlan> flightPlansAsDestination;
+    private List<Flight> flightPlansAsDestination;
 
     public Airport(){ }
 
