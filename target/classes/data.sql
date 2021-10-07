@@ -1,14 +1,14 @@
 -- GATES DROP DATABASE
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (1, 0, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (2, 0, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (3, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (4, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (5, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (6, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (7, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (8, 1, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (9, 2, 0);
-INSERT INTO gates (gate_number, wake_category, is_available) VALUES (10, 2, 0);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (1, 0, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (2, 0, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (3, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (4, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (5, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (6, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (7, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (8, 1, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (9, 2, 1);
+INSERT INTO gates (gate_number, wake_category, is_available) VALUES (10, 2, 1);
 INSERT INTO gates (gate_number, wake_category, is_available) VALUES (11, 2, 0);
 INSERT INTO gates (gate_number, wake_category, is_available) VALUES (12, 2, 0);
 INSERT INTO gates (gate_number, wake_category, is_available) VALUES (15, 0, 0);
@@ -32,7 +32,7 @@ INSERT INTO airports (city_name, country, iata_airport) VALUES ('Al Arish','Egyp
 
 -- FLIGHTPLANS DATADROP
 -- INSERT INTO flight_plans (date, ) VALUES ('2019-09-19','A','D8 3563 ','00:10','73H','KRK ',NULL,1)
-insert into flight_plans (date, time, iata_origin, iata_destination, iata_aircraft, route_number)
+insert into flights (date, time, iata_origin, iata_destination, iata_aircraft, route_number)
 values  ('2021-10-19', '00:10:00', 'KRK', 'CPH', '73H', 'D8 3563'),
         ('2021-10-19', '00:10:00', 'AHO', 'CPH', '73H', 'JTG360'),
         ('2021-10-19', '00:10:00', 'ARN', 'CPH', 'CR9', 'SK 9250'),
