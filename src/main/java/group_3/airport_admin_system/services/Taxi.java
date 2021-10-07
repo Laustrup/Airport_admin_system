@@ -1,14 +1,12 @@
 package group_3.airport_admin_system.services;
 
-import group_3.airport_admin_system.model.AircraftType;
-import group_3.airport_admin_system.model.FlightPlan;
-import group_3.airport_admin_system.model.Gate;
+import group_3.airport_admin_system.models.AircraftType;
+import group_3.airport_admin_system.models.FlightPlan;
+import group_3.airport_admin_system.models.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,11 +32,10 @@ public class Taxi {
 
             // Is gate available, otherwise prompt for new (open)  gatenumber
             if (gate.get().isAvailable() && isGateWakeBigger(gate.get(), flightPlan.get().getAircraftType())) {
-                flightPlan.get().setGateInfo("Taxing to gate " + gateNumber);
+                flightPlan.get().setGateInfo("Taxiing to gate " + gateNumber);
                 taxi(gate,flightPlan);
                 return true;
             }
-
         return false;
     }
 
@@ -82,5 +79,4 @@ public class Taxi {
 
         return gateSize >= aircraftSize;
     }
-
 }

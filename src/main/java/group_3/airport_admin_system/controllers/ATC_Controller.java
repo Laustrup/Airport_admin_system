@@ -1,7 +1,7 @@
 package group_3.airport_admin_system.controllers;
 
-import group_3.airport_admin_system.model.FlightPlan;
-import group_3.airport_admin_system.model.Gate;
+import group_3.airport_admin_system.models.FlightPlan;
+import group_3.airport_admin_system.models.Gate;
 import group_3.airport_admin_system.repositories.FlightPlanRepository;
 import group_3.airport_admin_system.repositories.GateRepository;
 import group_3.airport_admin_system.services.Taxi;
@@ -10,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -57,9 +56,15 @@ public class ATC_Controller {
         return "redirect:/gates";
     }
 
-    @GetMapping("/flightplans{id}")
-    public ResponseEntity<Optional<FlightPlan>> renderFlightplans(@PathVariable(name="id") Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(flightPlanRepository.findById(id));
+    @GetMapping("/flightplans")
+    public ResponseEntity<List<FlightPlan>> renderFlightplans() {
+
+        Iterable<FlightPlan> flightPlans = flightPlanRepository.findAll();
+        LinkedList<FlightPlan> listOfFlightPlans = new LinkedList<>();
+        for (FlightPlan flightplan : flightPlans) {
+            listOfFlightPlans.add(flightplan);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listOfFlightPlans);
     }
 
 

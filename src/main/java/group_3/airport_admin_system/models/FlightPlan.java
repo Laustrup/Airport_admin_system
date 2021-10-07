@@ -1,4 +1,4 @@
-package group_3.airport_admin_system.model;
+package group_3.airport_admin_system.models;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -19,6 +19,17 @@ public class FlightPlan {
     @ManyToOne
     @JoinColumn(name="iata_destination", nullable = false)
     private Airport destination;
+
+    public String getGateInfo() {
+        return gateInfo;
+    }
+
+    public void setGateInfo(String gateInfo) {
+        this.gateInfo = gateInfo;
+    }
+
+    @Column(name="gate_info")
+    private String gateInfo;
 
     @Column(name="date", nullable = false)
     //private LocalDate date; ?
