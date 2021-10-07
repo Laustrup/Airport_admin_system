@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Airport_admin_system" target="11" />
+      <module name="Airport_admin_system" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
