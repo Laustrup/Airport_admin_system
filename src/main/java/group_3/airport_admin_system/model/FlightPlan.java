@@ -12,47 +12,48 @@ import java.util.Date;
 public class FlightPlan {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //@Column( nullable = false)
-    @OneToOne
-    private Airport origin, destination;
+    //@OneToOne
+    //  private Airport origin, destination;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     //private LocalDate date; ?
     private Date date;
 
-    @Column( nullable = false, length = 10)
+    @Column(nullable = false, length = 10)
     private String routeNumber;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private Time time;
 
-    @Column( nullable = true , length = 255)
+    @Column(nullable = true, length = 255)
     private String gateInfo;
 
     @JsonIgnore
-  //  @Column( nullable = false, length = 10)
+    //  @Column( nullable = false, length = 10)
     @ManyToOne
-    @JoinColumn( name = "aircraft")
+    @JoinColumn(name = "aircraft")
     private AircraftType aircraftType;
 
     @JsonIgnore
     //@Column( nullable = false, length = 10)
     @ManyToOne
-    @JoinColumn( name = "airport")
+    @JoinColumn(name = "airport")
     private Airport airport;
 
 
-    public FlightPlan(){ }
+    public FlightPlan() {
+    }
 
 
     public Long getId() {
         return id;
     }
 
-    public Airport getOrigin() {
+    /*public Airport getOrigin() {
         return origin;
     }
 
@@ -67,7 +68,7 @@ public class FlightPlan {
     public void setDestination(Airport destination) {
         this.destination = destination;
     }
-
+*/
     public Date getDate() {
         return date;
     }
