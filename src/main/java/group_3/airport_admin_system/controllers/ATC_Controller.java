@@ -45,7 +45,7 @@ public class ATC_Controller {
     }
 
     // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
-    @PutMapping("/flightplans/{id}")
+    @PutMapping("/flights/{id}")
     public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
 
 
@@ -55,13 +55,13 @@ public class ATC_Controller {
         return "redirect:/gates";
     }
 
-    @GetMapping("/flightplans")
-    public ResponseEntity<List<Flight>> renderFlightplans() {
+    @GetMapping("/flights")
+    public ResponseEntity<List<Flight>> renderFlight() {
 
-        Iterable<Flight> flightPlans = taxi.flightRepository().findAll();
+        Iterable<Flight> flights = taxi.flightRepository().findAll();
         LinkedList<Flight> listOfFlights = new LinkedList<>();
-        for (Flight flightplan : flightPlans) {
-            listOfFlights.add(flightplan);
+        for (Flight flight : flights) {
+            listOfFlights.add(flight);
         }
         return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
     }
