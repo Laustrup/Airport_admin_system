@@ -6,6 +6,7 @@
         <exploded>true</exploded>
         <module>Airport_admin_system</module>
         <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="root">
