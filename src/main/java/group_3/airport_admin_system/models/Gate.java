@@ -1,7 +1,5 @@
-package group_3.airport_admin_system.model;
+package group_3.airport_admin_system.models;
 
-
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 

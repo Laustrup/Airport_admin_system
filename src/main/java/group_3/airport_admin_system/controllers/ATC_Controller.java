@@ -1,7 +1,7 @@
-package group_3.airport_admin_system.Controllers;
+package group_3.airport_admin_system.controllers;
 
-import group_3.airport_admin_system.model.FlightPlan;
-import group_3.airport_admin_system.model.Gate;
+import group_3.airport_admin_system.models.FlightPlan;
+import group_3.airport_admin_system.models.Gate;
 import group_3.airport_admin_system.services.ATC_Service;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
