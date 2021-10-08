@@ -37,8 +37,8 @@ public class Flight {
     @JoinColumn(name = "iata_aircraft", nullable = false)
     private AircraftType aircraftType;
 
-    protected Flight() { }
-    
+    public Flight() { }
+
     public Flight(Airport origin, Airport destination, Date date, String routeNumber, AircraftType aircraftType) {
         this.origin = origin;
         this.destination = destination;

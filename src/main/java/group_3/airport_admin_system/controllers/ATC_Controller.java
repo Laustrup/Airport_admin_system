@@ -2,6 +2,7 @@ package group_3.airport_admin_system.controllers;
 
 import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
+import group_3.airport_admin_system.services.FlightService;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,17 @@ public class ATC_Controller {
 
     // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
     @PutMapping("/flights/{id}")
-    public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
-
-
+    public String taxiing(@PathVariable (name = "id") Long id,
+                                            @RequestParam (name = "gate_number") Long gateNumber,
+                                             FlightService flightservice){
 
         taxi.movePlaneToGate(gateNumber,id);
 
-        return "redirect:/gates";
+        Flight flight = new Flight();
+        flightservice.findFlightById(id);
+
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body();
     }
 
     @GetMapping("/flights")
