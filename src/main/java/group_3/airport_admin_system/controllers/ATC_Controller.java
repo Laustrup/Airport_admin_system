@@ -47,13 +47,14 @@ public class ATC_Controller {
                                           @RequestParam (name = "gate_number") Long gateNumber,
                                           FlightService flightservice){
 
+        // FIXME THIS METHOD/ENDPOINT DOES NOT WORK AS INTENDED!
+
         taxi.movePlaneToGate(gateNumber,id);
 
         Flight flight = new Flight();
         flightservice.findFlightById(id);
 
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(flight);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/flights")
