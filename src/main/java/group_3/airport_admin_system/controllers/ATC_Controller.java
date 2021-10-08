@@ -15,7 +15,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ATC_Controller {
 
-    // TODO: Brug ResponseEntity i stedet for String. Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
     private Taxi taxi;
 
