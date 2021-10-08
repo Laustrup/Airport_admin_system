@@ -5,47 +5,50 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Table(name="flights")
+@Table(name = "flights")
 public class Flight {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="iata_origin", nullable = false)
+    @JoinColumn(name = "iata_origin", nullable = false)
     private Airport origin;
 
     @ManyToOne
-    @JoinColumn(name="iata_destination", nullable = false)
+    @JoinColumn(name = "iata_destination", nullable = false)
     private Airport destination;
 
-    public String getGateInfo() {
-        return gateInfo;
-    }
-
-    public void setGateInfo(String gateInfo) {
-        this.gateInfo = gateInfo;
-    }
-
-    @Column(name="gate_info")
+    @Column(name = "gate_info")
     private String gateInfo;
 
-    @Column(name="date", nullable = false)
+    @Column(name = "date", nullable = false)
     //private LocalDate date; ?
     private Date date;
 
-    @Column( nullable = false)
+    @Column(name = "time", nullable = false)
     private Time time;
 
-    @Column(name="route_number", nullable = false)
+    @Column(name = "route_number", nullable = false)
     private String routeNumber;
 
     @ManyToOne
-    @JoinColumn(name="iata_aircraft", nullable = false)
+    @JoinColumn(name = "iata_aircraft", nullable = false)
     private AircraftType aircraftType;
 
-    public Flight(){ }
+    protected Flight() { }
+
+    public Flight(Airport origin, Airport destination, String gateInfo, Date date, Time time, String routeNumber, AircraftType aircraftType) {
+        this.origin = origin;
+        this.destination = destination;
+        this.gateInfo = gateInfo;
+        this.date = date;
+        this.time = time;
+        this.routeNumber = routeNumber;
+        this.aircraftType = aircraftType;
+    }
 
     public Long getId() {
         return id;
@@ -69,6 +72,14 @@ public class Flight {
 
     public void setDestination(Airport destination) {
         this.destination = destination;
+    }
+
+    public String getGateInfo() {
+        return gateInfo;
+    }
+
+    public void setGateInfo(String gateInfo) {
+        this.gateInfo = gateInfo;
     }
 
     public Date getDate() {

@@ -1,30 +1,32 @@
 package group_3.airport_admin_system.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table( name = "aircraft_types")
+@Table(name = "aircraft_types")
 public class AircraftType {
 
     @Id
-    @Column(name="iata_aircraft")
+    @Column(name = "iata_aircraft")
     private String id;
 
-    @Column(name="icao_code")
+    @Column(name = "icao_code")
     private String ICAOCode;
 
-    @Column(name="model_name", nullable = false )
+    @Column(name = "model_name", nullable = false )
     private String modelName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "aircraftType")
     private List<Flight> flightPlans;
 
-    @Column(name="wake_category", nullable = false )
-    private Wakecategory wake;
+    @Column(name = "wake_category", nullable = false )
+    private WakeCategory wakeCategory;
 
-
-    public AircraftType(){ }
+    public AircraftType() { }
 
     public String getId() {
         return id;
@@ -50,11 +52,11 @@ public class AircraftType {
         this.modelName = modelName;
     }
 
-    public Wakecategory getWake() {
-        return wake;
+    public WakeCategory getWakeCategory() {
+        return wakeCategory;
     }
 
-    public void setWake(Wakecategory wake) {
-        this.wake = wake;
+    public void setWakeCategory(WakeCategory wakeCategory) {
+        this.wakeCategory = wakeCategory;
     }
 }

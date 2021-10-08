@@ -1,5 +1,7 @@
 package group_3.airport_admin_system.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,9 +20,11 @@ public class Airport{
     @Column(name="iata_airport")
     private String id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "origin")
     private List<Flight> flightPlansAsOrigin;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "destination")
     private List<Flight> flightPlansAsDestination;
 

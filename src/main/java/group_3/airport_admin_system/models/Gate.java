@@ -1,25 +1,22 @@
 package group_3.airport_admin_system.models;
 
-
 import javax.persistence.*;
 
 @Entity
-@Table(name="gates")
+@Table(name = "gates")
 public class Gate {
-
 
     @Id
     @Column(name = "gate_number")
     private Long number;
 
     @Column(name="wake_category", nullable = false)
-    private Wakecategory wake;
+    private WakeCategory wakeCategory;
 
     @Column( name="is_available", nullable = false)
     private boolean isAvailable;
 
-
-    public Gate(){ }
+    public Gate() { }
 
     public Long getNumber() {
         return number;
@@ -29,8 +26,8 @@ public class Gate {
         this.number = number;
     }
 
-    public Wakecategory getWake() {
-        return wake;
+    public WakeCategory getWakeCategory() {
+        return wakeCategory;
     }
 
     public boolean isAvailable() {

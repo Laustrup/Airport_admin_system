@@ -12,18 +12,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ATC_Controller {
-//TODO:
-//Brug ResponseEntity i stedet for String.
-// Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
+    // TODO: Brug ResponseEntity i stedet for String. Evt. tilføj en RequestMapping over RestController i stedet for "gatemanaging" flere steder.
 
-   Taxi taxi;
+    private Taxi taxi;
+
     public ATC_Controller(Taxi taxi){
         this.taxi = taxi;
-
-
-
     }
 
     @GetMapping("/gates")
