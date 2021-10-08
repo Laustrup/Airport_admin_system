@@ -41,19 +41,35 @@ public class ATC_Controller {
         return ResponseEntity.status(HttpStatus.OK).body(availableGates);
     }
 
-    // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
-    @PutMapping("/flights/{id}")
-    public String taxiing(@PathVariable (name = "id") Long id,
-                                            @RequestParam (name = "gate_number") Long gateNumber,
-                                             FlightService flightservice){
 
+    @PutMapping("/flights/{id}")
+    public ResponseEntity<Flight> taxiing(@PathVariable (name = "id") Long id,
+                                          FlightService flightservice){
+
+        Long gateNumber = new Long(0);
+        for (Gate openGate : taxi.gateRepository().findAll()){
+            if (openGate.isAvailable()){
+                gateNumber = openGate.getNumber();
+            }
+        }
         taxi.movePlaneToGate(gateNumber,id);
 
-        Flight flight = new Flight();
-        flightservice.findFlightById(id);
+        Flight flight = flightservice.findFlightById(id);
 
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body();
+        System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
+        System.err.println("The flight comes from " + flight.getOrigin() + " on the " + flight.getDate());
+
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/flights/{id}")
+    public ResponseEntity<Flight> taxiDone(@PathVariable(name = "id") Long id, FlightService flightService){
+
+        Flight flight = flightService.findFlightById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(flight);
     }
 
     @GetMapping("/flights")
@@ -66,71 +82,4 @@ public class ATC_Controller {
         }
         return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
     }
-
-
-    // TODO Do we need the rest?
-
-    /*
-    // Getmapping for succes or failure of taxi
-    // Endpoint(/gatemanaging/succes)
-    @GetMapping("/gates/succes_taxi/gate_number")
-    public String succesTaxi(@PathVariable ("gate_number") int gateNumber){
-        return "succes_taxi.html";
-    }
-
-    // Endpoint(/gatemanaging/failure)
-    @GetMapping("/gates/failure_taxi/gate_number")
-    public String failureTaxi(@PathVariable ("gate_number") int gateNumber){
-        return "failure_taxi.html";
-    }
-
-
-    @GetMapping("/")
-    public ResponseEntity<List> getGateInformation(){
-        //List<Gate> allGates = new ArrayList();
-        //atcService.getAllGateInformation().findAll().forEach(gate -> allGates.add(gate));
-        //return ResponseEntity.status(HttpStatus.OK).body(new );
-        return null;
-    }
-
-    /*
-    @GetMapping("/gatemanaging/")
-    public String renderGateManaging() {
-
-        // Perhaps index.html with taxi fragment thymeleaf
-         // Put available gates into model with key gates
-        // return "taxi.html";
-    }
-     */
-
-    /*
-    @PostMapping("/gatemanaging/taxi")
-    public String renderGateManaging(parameters) {
-
-        // taxi.movePlaneToGate(gateNumber, routeNumber)
-
-        // Needs to make sure from boolean return if action is allowed
-
-        // return "/gatemanaging/succes   or   failure";
-    }
-     */
-
-    /*
-    @GetMapping("/gatemanaging/succes")
-    public String gateSucces() {
-
-        // Add succes to model
-        // return "taxi.html";
-    }
-     */
-
-        /*
-    @GetMapping("/gatemanaging/failure")
-    public String gateFailure() {
-
-        // Add failure to model
-        // return "taxi.html";
-    }
-     */
-
 }

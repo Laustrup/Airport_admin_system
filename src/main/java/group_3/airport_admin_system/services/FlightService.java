@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class FlightService {
 
-    FlightRepository flightRepository;
+    private FlightRepository flightRepository;
 
-    @Autowired
+
     public FlightService(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
