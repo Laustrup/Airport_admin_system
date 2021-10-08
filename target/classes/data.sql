@@ -24,7 +24,12 @@ INSERT INTO gates (gate_number, wake_category, is_available) VALUES
     (25, 2, 0),
     (26, 2, 0);
 
-
+Insert into logs_table (id, incident_name,incidentflight,date,responsible)
+VALUES
+(50,'Refuilling',1,'2021-10-19 09:45:00','Mechanic'),
+(60,'Boarding',1,'2021-10-19 09:45:00','Flight_crew'),
+(70,'Cargo_in',1,'2021-10-19 09:45:00','Carriers'),
+(80,'Taxing_to_runway',1,'2021-10-19 09:45:00','ATC');
 
 
 

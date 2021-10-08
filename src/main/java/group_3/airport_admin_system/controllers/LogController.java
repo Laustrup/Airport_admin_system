@@ -26,7 +26,6 @@ public class LogController {
     @GetMapping("/view_logs")
     public ResponseEntity<List<Log>> renderLogs(Model model) {
 
-        logService.insertNewLog("Refuelling",Long.valueOf(1),new Date(),"Mechanic");
         List<Log> logs = logService.getAllLogs();
 
         return ResponseEntity.ok(logs);
