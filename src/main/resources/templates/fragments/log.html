@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div th:each="{log : logs}">
-        <p th:text="log."></p>
+    <div th:each="${log : logs}">
+        <p th:text="${log.getIncidentTime()}"></p>
+        <p th:text="${log.getIncidentDate()}"></p>
+        <p th:text="${log.getIncidentAircraft()}"></p>
+        <p th:text="${log.getIncidentResponsible()}"></p>
     </div>
+
+    <a href="/">Go back</a>
 
 </html>

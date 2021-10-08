@@ -15,7 +15,7 @@ public class LogController {
 
         Iterable<Log> unorderedLogs = new LogService().getAllLogs();
         ArrayList<Log> logs = new ArrayList<>();
-        LinkedList<> logsInOrder = new LinkedList();
+        LinkedList<Log> logsInOrder = new LinkedList();
 
         for (Log log : unorderedLogs) {
             logs.add(log);
@@ -25,6 +25,7 @@ public class LogController {
         }
 
         model.addAttribute("logs",logsInOrder);
+        model.addAttribute("situation","log");
 
         return "index.html";
     }
