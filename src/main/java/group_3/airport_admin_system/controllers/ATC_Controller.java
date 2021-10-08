@@ -41,6 +41,20 @@ public class ATC_Controller {
         return ResponseEntity.status(HttpStatus.OK).body(availableGates);
     }
 
+    @GetMapping("/flights")
+    public ResponseEntity<List<Flight>> renderFlight() {
+
+        Iterable<Flight> flights = taxi.flightRepository().findAll();
+        List<Flight> listOfFlights = new LinkedList<>();
+        for (Flight flight : flights) {
+            listOfFlights.add(flight);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
+    }
+
+
+    //TODO: De to /flights/{id} endpoints nedenunder skaber "Internal Server Error".
+    // PUT siger at flightRepo er = null og GET siger at "Request Method 'GET' not supported"
 
     @PutMapping("/flights/{id}")
     public ResponseEntity<Flight> taxiing(@PathVariable (name = "id") Long id,
@@ -70,16 +84,5 @@ public class ATC_Controller {
         Flight flight = flightService.findFlightById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(flight);
-    }
-
-    @GetMapping("/flights")
-    public ResponseEntity<List<Flight>> renderFlight() {
-
-        Iterable<Flight> flights = taxi.flightRepository().findAll();
-        LinkedList<Flight> listOfFlights = new LinkedList<>();
-        for (Flight flight : flights) {
-            listOfFlights.add(flight);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
     }
 }
