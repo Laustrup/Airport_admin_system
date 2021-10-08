@@ -3,12 +3,14 @@ package group_3.airport_admin_system.controllers;
 import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
 import group_3.airport_admin_system.services.FlightService;
+import group_3.airport_admin_system.services.LogService;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,9 +20,11 @@ public class ATC_Controller {
 
 
     private Taxi taxi;
+    private LogService logService;
 
-    public ATC_Controller(Taxi taxi){
+    public ATC_Controller(Taxi taxi,LogService logService){
         this.taxi = taxi;
+        this.logService = logService;
     }
 
     @GetMapping("/gates")
@@ -69,6 +73,7 @@ public class ATC_Controller {
         taxi.movePlaneToGate(gateNumber,id);
 
         Flight flight = flightservice.findFlightById(id);
+        logService.insertNewLog("Taxing_to_gate",id,new Date(),"ATC");
 
 
         System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
