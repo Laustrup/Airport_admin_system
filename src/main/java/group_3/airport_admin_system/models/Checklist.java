@@ -1,24 +1,31 @@
 package group_3.airport_admin_system.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "checklists")
+@JsonPropertyOrder({ "id" })
 public class Checklist {
 
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
+    @JsonProperty("is_boarded")
     @Column(name = "is_boarded")
     private boolean isBoarded;
 
+    @JsonProperty("has_refueled")
     @Column(name = "has_refueled")
     private boolean hasRefueled;
 
+    @JsonProperty("is_cargo_loaded")
     @Column(name = "is_cargo_loaded")
     private boolean isCargoLoaded;
 

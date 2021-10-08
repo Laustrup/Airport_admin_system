@@ -1,6 +1,7 @@
 package group_3.airport_admin_system.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,12 +12,15 @@ public class AircraftType {
 
     @Id
     @Column(name = "iata_aircraft")
+    @JsonProperty("iata_code")
     private String id;
 
     @Column(name = "icao_code")
+    @JsonProperty("icao_code")
     private String ICAOCode;
 
     @Column(name = "model_name", nullable = false )
+    @JsonProperty("model_name")
     private String modelName;
 
     @JsonIgnore
@@ -24,6 +28,7 @@ public class AircraftType {
     private List<Flight> flightPlans;
 
     @Column(name = "wake_category", nullable = false )
+    @JsonProperty("wake_category")
     private WakeCategory wakeCategory;
 
     public AircraftType() { }

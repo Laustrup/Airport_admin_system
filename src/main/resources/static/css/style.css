@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+:root {
+  font-size: 16px;
+  --color-accent: rgb(254, 203, 0);
+  --color-surface: rgb(255, 255, 255);
+  --color-underground: rgb(20, 27, 50);
+  --color-caption-on-surface: rgba(0, 0, 0, 1);
+  --color-body-on-surface: rgba(0, 0, 0, 0.85);
+  --color-caption-on-underground: rgba(255, 255, 255, 1);
+  --color-body-on-underground: rgba(255, 255, 255, 0.6);
+  --color-border: rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  border: none;
+  font: inherit;
+  background-color: inherit;
+}
+
+[disabled], :disabled {
+  opacity: 38%;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+svg {
+  width: 2.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-body-on-surface);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: var(--color-caption-on-surface);
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+button {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-underground);
+  color: var(--color-caption-on-underground);
+  letter-spacing: 0.025rem;
+  cursor: pointer;
+}
+button + button {
+  margin-left: 0.5rem;
+}
+
+h1 {
+  margin: 0.75rem;
+}
+
+table.flights {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.flights thead {
+  text-align: left;
+  font-weight: bold;
+  background-color: var(--color-underground);
+  color: var(--color-caption-on-underground);
+}
+table.flights thead th {
+  padding: 0.75rem 1.5rem;
+}
+table.flights tbody {
+  font-size: 1.125rem;
+}
+table.flights tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+table.flights tbody td {
+  padding: 1.5rem;
+}
+
+table.checklist {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.checklist thead {
+  text-align: left;
+  font-weight: bold;
+  background-color: var(--color-underground);
+  color: var(--color-caption-on-underground);
+}
+table.checklist thead th {
+  padding: 0.75rem 1.5rem;
+}
+table.checklist tbody {
+  font-size: 1.125rem;
+}
+table.checklist tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+table.checklist tbody td {
+  padding: 1.5rem;
+}
+
+.loading-icon::after {
+  content: "";
+  width: 3rem;
+  height: 3rem;
+  display: block;
+  margin: 2.5rem auto;
+  border-radius: 50%;
+  border: 0.5rem solid var(--color-accent);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: loading 0.5s infinite linear;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
