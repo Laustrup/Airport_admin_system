@@ -2,14 +2,15 @@ package group_3.airport_admin_system.controllers;
 
 import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
-import group_3.airport_admin_system.repositories.FlightRepository;
 import group_3.airport_admin_system.services.FlightService;
+import group_3.airport_admin_system.services.LogService;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,10 +21,12 @@ public class ATC_Controller {
 
     private Taxi taxi;
     private FlightService flightService;
+    private LogService logService;
 
-    public ATC_Controller(Taxi taxi, FlightService flightService){
+    public ATC_Controller(Taxi taxi, FlightService flightService,LogService logService){
         this.taxi = taxi;
         this.flightService = flightService;
+        this.logService = logService;
     }
 
     @GetMapping("/gates")
@@ -39,7 +42,6 @@ public class ATC_Controller {
         }
 
         model.addAttribute("gates",availableGates);
-
         //return ResponseEntity.ok(model);
         return ResponseEntity.status(HttpStatus.OK).body(availableGates);
     }
@@ -69,6 +71,7 @@ public class ATC_Controller {
 
         Flight flight = flightService.findFlightById(id);
 
+        logService.insertNewLog("Taxi_aircraft_to_gate",id,new Date(),"ATC");
 
         System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
         System.err.println("The flight comes from " + flight.getOriginAirport() + " on the " + flight.getDate());
