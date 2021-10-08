@@ -43,9 +43,9 @@ public class ATC_Controller {
 
     // Postmapping gets gatenumber and routenumber from form and starts taxiservice, change flightplan info
     @PutMapping("/flights/{id}")
-    public String taxiing(@PathVariable (name = "id") Long id,
-                                            @RequestParam (name = "gate_number") Long gateNumber,
-                                             FlightService flightservice){
+    public ResponseEntity<Flight> taxiing(@PathVariable (name = "id") Long id,
+                                          @RequestParam (name = "gate_number") Long gateNumber,
+                                          FlightService flightservice){
 
         taxi.movePlaneToGate(gateNumber,id);
 
@@ -53,7 +53,7 @@ public class ATC_Controller {
         flightservice.findFlightById(id);
 
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(flight);
     }
 
     @GetMapping("/flights")
