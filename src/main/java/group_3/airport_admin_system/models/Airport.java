@@ -1,7 +1,6 @@
 package group_3.airport_admin_system.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,36 +9,27 @@ import java.util.List;
 @Table(name = "airports")
 public class Airport{
 
-    @Id
-    @JsonProperty("iata_code")
-    @Column(name = "iata_airport", nullable = false, updatable = false)
-    private String id;
 
-    @JsonProperty("city_name")
-    @Column(name = "city_name")
+    @Column(name="city_name")
     private String cityName;
 
-    @JsonProperty("country_name")
-    @Column(name = "country_name")
-    private String countryName;
+    @Column(name="country")
+    private String country;
+
+    @Id
+    @Column(name="iata_airport")
+    private String id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "originAirport")
+    @OneToMany(mappedBy = "origin")
     private List<Flight> flightPlansAsOrigin;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "destinationAirport")
+    @OneToMany(mappedBy = "destination")
     private List<Flight> flightPlansAsDestination;
 
-    public Airport() { }
+    public Airport(){ }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCityName() {
         return cityName;
@@ -49,11 +39,11 @@ public class Airport{
         this.cityName = cityName;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryName(String country) {
-        this.countryName = country;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

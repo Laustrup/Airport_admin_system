@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <H3>Logs of actions</H3>
+
+    <ul th:each="${log : logs}">
+        <p>--------</p>
+        <li th:text="${log.getIncidentTime()}"></li>
+        <li th:text="${log.getIncidentDate()}"></li>
+        <li th:text="${log.getIncidentAircraft()}"></li>
+        <li th:text="${log.getIncidentResponsible()}"></li>
+        <p>--------</p>
+    </ul>
+
+    <a href="/">Go back</a>
+
+</html>

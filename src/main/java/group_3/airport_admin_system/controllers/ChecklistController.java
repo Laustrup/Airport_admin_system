@@ -6,11 +6,13 @@ import group_3.airport_admin_system.repositories.ChecklistRepository;
 import group_3.airport_admin_system.repositories.FlightRepository;
 import group_3.airport_admin_system.services.ChecklistService;
 import group_3.airport_admin_system.services.FlightService;
+import group_3.airport_admin_system.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,10 +22,12 @@ public class ChecklistController {
 
     FlightService flightService;
     ChecklistService checklistService;
+    LogService logService;
     
-    public ChecklistController(FlightService flightService, ChecklistService checklistService) {
+    public ChecklistController(FlightService flightService, ChecklistService checklistService, LogService logService) {
         this.flightService = flightService;
         this.checklistService = checklistService;
+        this.logService = logService;
     }
 
     @GetMapping("/{id}/checklist")
@@ -35,7 +39,7 @@ public class ChecklistController {
             return ResponseEntity.notFound().build();
 
         Checklist checklist = checklistService.findByFlight(flight);
-
+        logService.insertNewLog("UpdateChecklist",id,new Date(),"Ground_Crew");
         return ResponseEntity.ok(checklist);
     }
 
@@ -49,11 +53,14 @@ public class ChecklistController {
         if (checklist != null) {
             if (id.equals(checklist.getId())) {
                 checklistService.save(modifiedChecklist);
+                logService.insertNewLog("UpdateChecklist",id,new Date(),"Ground_Crew");
                 return ResponseEntity.noContent().build();
             } else {
+                logService.insertNewLog("UpdateChecklist_Failed",id,new Date(),"Ground_Crew");
                 return ResponseEntity.badRequest().build();
-            }
+                }
         } else {
+            logService.insertNewLog("UpdateChecklist_Failed",id,new Date(),"Ground_Crew");
             return ResponseEntity.notFound().build();
         }
     }
