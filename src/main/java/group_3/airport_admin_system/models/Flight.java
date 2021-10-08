@@ -24,16 +24,11 @@ public class Flight {
     private Airport destination;
 
     @OneToOne
-    @JsonIgnore
     @JoinColumn(referencedColumnName= "gate_number", name="gate_id")
     private Gate gate;
 
     @Column(name = "date", nullable = false)
-    //private LocalDate date; ?
     private Date date;
-
-    @Column(name = "time", nullable = false)
-    private Time time;
 
     @Column(name = "route_number", nullable = false)
     private String routeNumber;
@@ -43,12 +38,11 @@ public class Flight {
     private AircraftType aircraftType;
 
     protected Flight() { }
-
-    public Flight(Airport origin, Airport destination, Date date, Time time, String routeNumber, AircraftType aircraftType) {
+    
+    public Flight(Airport origin, Airport destination, Date date, String routeNumber, AircraftType aircraftType) {
         this.origin = origin;
         this.destination = destination;
         this.date = date;
-        this.time = time;
         this.routeNumber = routeNumber;
         this.aircraftType = aircraftType;
     }
@@ -91,14 +85,6 @@ public class Flight {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
     }
 
     public String getRouteNumber() {
