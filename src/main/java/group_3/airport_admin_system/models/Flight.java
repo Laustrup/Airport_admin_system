@@ -10,6 +10,7 @@ import java.util.Date;
 public class Flight {
 
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
@@ -26,16 +27,20 @@ public class Flight {
 
     @OneToOne
     @JoinColumn(referencedColumnName= "gate_number", name="gate_id")
+    @JsonProperty("gate")
     private Gate gate;
 
+    @JsonProperty("flown_at")
     @Column(name = "date", nullable = false)
     private Date date;
 
+    @JsonProperty("route_number")
     @Column(name = "route_number", nullable = false)
     private String routeNumber;
 
     @ManyToOne
     @JoinColumn(name = "iata_aircraft", nullable = false)
+    @JsonProperty("aircraft_type")
     private AircraftType aircraftType;
 
     public Flight() { }

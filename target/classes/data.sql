@@ -390,7 +390,7 @@ INSERT INTO aircraft_types VALUES
     ('YN7', 'AN24', 'Xian Yunshuji Y7', 1),
     ('YS1', 'YS11', 'NAMC YS-11', 1);
 
-INSERT INTO airports (city_name, country, iata_airport) VALUES
+INSERT INTO airports (city_name, country_name, iata_airport) VALUES
     ('Al Arish', 'Egypt', 'AAC'),
     ('Annaba', 'Algeria', 'AAE'),
     ('Alborg', 'Denmark', 'AAL'),
