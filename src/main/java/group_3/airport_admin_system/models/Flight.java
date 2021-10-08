@@ -1,9 +1,8 @@
 package group_3.airport_admin_system.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -17,11 +16,13 @@ public class Flight {
 
     @ManyToOne
     @JoinColumn(name = "iata_origin", nullable = false)
-    private Airport origin;
+    @JsonProperty("origin_airport")
+    private Airport originAirport;
 
     @ManyToOne
     @JoinColumn(name = "iata_destination", nullable = false)
-    private Airport destination;
+    @JsonProperty("destination_airport")
+    private Airport destinationAirport;
 
     @OneToOne
     @JoinColumn(referencedColumnName= "gate_number", name="gate_id")
@@ -39,9 +40,9 @@ public class Flight {
 
     public Flight() { }
 
-    public Flight(Airport origin, Airport destination, Date date, String routeNumber, AircraftType aircraftType) {
-        this.origin = origin;
-        this.destination = destination;
+    public Flight(Airport originAirport, Airport destinationAirport, Date date, String routeNumber, AircraftType aircraftType) {
+        this.originAirport = originAirport;
+        this.destinationAirport = destinationAirport;
         this.date = date;
         this.routeNumber = routeNumber;
         this.aircraftType = aircraftType;
@@ -63,20 +64,20 @@ public class Flight {
         this.id = id;
     }
 
-    public Airport getOrigin() {
-        return origin;
+    public Airport getOriginAirport() {
+        return originAirport;
     }
 
-    public void setOrigin(Airport origin) {
-        this.origin = origin;
+    public void setOriginAirport(Airport origin) {
+        this.originAirport = origin;
     }
 
-    public Airport getDestination() {
-        return destination;
+    public Airport getDestinationAirport() {
+        return destinationAirport;
     }
 
-    public void setDestination(Airport destination) {
-        this.destination = destination;
+    public void setDestinationAirport(Airport destination) {
+        this.destinationAirport = destination;
     }
 
     public Date getDate() {
