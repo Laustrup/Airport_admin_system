@@ -58,7 +58,7 @@ public class ATC_Controller {
 
 
         System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
-        System.err.println("The flight comes from " + flight.getOrigin() + " on the " + flight.getDate());
+        System.err.println("The flight comes from " + flight.getOriginAirport() + " on the " + flight.getDate());
 
 
         return ResponseEntity.status(HttpStatus.OK).build();
