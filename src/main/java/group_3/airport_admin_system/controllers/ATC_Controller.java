@@ -2,6 +2,7 @@ package group_3.airport_admin_system.controllers;
 
 import group_3.airport_admin_system.models.Flight;
 import group_3.airport_admin_system.models.Gate;
+import group_3.airport_admin_system.repositories.FlightRepository;
 import group_3.airport_admin_system.services.FlightService;
 import group_3.airport_admin_system.services.Taxi;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,11 @@ public class ATC_Controller {
 
 
     private Taxi taxi;
+    private FlightService flightService;
 
-    public ATC_Controller(Taxi taxi){
+    public ATC_Controller(Taxi taxi, FlightService flightService){
         this.taxi = taxi;
+        this.flightService = flightService;
     }
 
     @GetMapping("/gates")
@@ -53,12 +56,8 @@ public class ATC_Controller {
     }
 
 
-    //TODO: De to /flights/{id} endpoints nedenunder skaber "Internal Server Error".
-    // PUT siger at flightRepo er = null og GET siger at "Request Method 'GET' not supported"
-
     @PutMapping("/flights/{id}")
-    public ResponseEntity<Flight> taxiing(@PathVariable (name = "id") Long id,
-                                          FlightService flightservice){
+    public ResponseEntity<Flight> taxiing(@PathVariable (name = "id") Long id){
 
         Long gateNumber = new Long(0);
         for (Gate openGate : taxi.gateRepository().findAll()){
@@ -68,7 +67,7 @@ public class ATC_Controller {
         }
         taxi.movePlaneToGate(gateNumber,id);
 
-        Flight flight = flightservice.findFlightById(id);
+        Flight flight = flightService.findFlightById(id);
 
 
         System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
@@ -79,7 +78,7 @@ public class ATC_Controller {
     }
 
     @GetMapping("/flights/{id}")
-    public ResponseEntity<Flight> taxiDone(@PathVariable(name = "id") Long id, FlightService flightService){
+    public ResponseEntity<Flight> taxiDone(@PathVariable(name = "id") Long id){
 
         Flight flight = flightService.findFlightById(id);
 
