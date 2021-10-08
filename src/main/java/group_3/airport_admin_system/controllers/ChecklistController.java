@@ -27,7 +27,7 @@ public class ChecklistController {
     }
 
     @GetMapping("/{id}/checklist")
-    public ResponseEntity<Checklist> getCheckist(@PathVariable("id") Long id) {
+    public ResponseEntity<Checklist> getChecklist(@PathVariable("id") Long id) {
 
         Flight flight = flightService.findById(id);
 
