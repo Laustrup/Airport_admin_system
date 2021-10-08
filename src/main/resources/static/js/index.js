@@ -52,7 +52,7 @@ function localCache() {
             findAll: () => gates,
             findAllAvailable: () => gates.filter(gate => gate.is_available),
             findByNumber: number => gates.find(gate => gate.number == number),
-            save: gate => saveData('http://localhost:8080/gates', gate)
+            save: gate => saveData('http://localhost:8080/gates', gate, "number")
         },
         flights: {
             findAll: () => flights,

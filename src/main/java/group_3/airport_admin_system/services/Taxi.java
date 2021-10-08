@@ -63,9 +63,6 @@ public class Taxi {
         // Change gate availability to occupied
         gate.setAvailable(false);
         gRepo.save(gate);
-
-        // Delete flight_plan
-        fpRepo.delete(flight);
     }
 
 }

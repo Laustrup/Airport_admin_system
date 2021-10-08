@@ -29,23 +29,6 @@ public class ATC_Controller {
         this.logService = logService;
     }
 
-    @GetMapping("/gates")
-    public ResponseEntity<List<Gate>> rendergates(Model model){
-
-        Iterable<Gate> gates = taxi.gateRepository().findAll();
-        LinkedList<Gate> availableGates = new LinkedList<>();
-
-        for (Gate gate : gates) {
-            if (gate.isAvailable()) {
-                availableGates.add(gate);
-            }
-        }
-
-        model.addAttribute("gates",availableGates);
-        //return ResponseEntity.ok(model);
-        return ResponseEntity.status(HttpStatus.OK).body(availableGates);
-    }
-
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> renderFlight() {
 
@@ -67,6 +50,7 @@ public class ATC_Controller {
                 gateNumber = openGate.getNumber();
             }
         }
+
         taxi.movePlaneToGate(gateNumber,id);
 
         Flight flight = flightService.findFlightById(id);
