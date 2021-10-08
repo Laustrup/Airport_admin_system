@@ -26,8 +26,10 @@ public class LogService {
         logRep.save(new Log(incidentName, incidentFlight,incidentTime,incidentDate, incidentResponsible));
     }
 
-    public Iterable<Log> getAllLogs(){
-        return logRep.findAll();
+    public List<Log> getAllLogs(){
+        List<Log> allLogs = new ArrayList<>();
+        logRep.findAll().forEach(log -> allLogs.add(log));
+        return allLogs;
     }
 
     public List<Log> getAllLogsByincidentFlight(Long flight){

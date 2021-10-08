@@ -16,6 +16,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
@@ -38,22 +40,23 @@ class LogServiceTest {
 
         Log logTest = new Log("Taxi_To_Gate", Long.valueOf(420), Time.valueOf(LocalTime.now()), new Date(), "ATC");
         Log logTest2 = new Log("Taxi_To_Gate", Long.valueOf(1), Time.valueOf(LocalTime.now()), new Date(), "ATC");
-        Log logTest3 = new Log("Taxi_To_Gate", Long.valueOf(1), Time.valueOf(LocalTime.now()), new Date(), "ATC");
-        Log logTest4 = new Log("Taxi_To_Gate", Long.valueOf(1), Time.valueOf(LocalTime.now()), new Date(), "ATC");
+        Log logTest3 = new Log("Refueling", Long.valueOf(1), Time.valueOf(LocalTime.now()), new Date(), "Mechanic");
+        Log logTest4 = new Log("Board_aircraft", Long.valueOf(1), Time.valueOf(LocalTime.now()), new Date(), "Flightcrew");
 
         List<Log> testList = new ArrayList<>();
+        testList.add(logTest);
         testList.add(logTest2);
         testList.add(logTest3);
         testList.add(logTest4);
         Mockito.when(logRep.findById(Long.valueOf(420))).thenReturn(java.util.Optional.of(logTest));
 
-        Mockito.when(logRep.findAllByFlightId(Long.valueOf(1))).thenReturn(testList);
+        Mockito.when(logRep.findAllByFlightId(Long.valueOf(1))).thenReturn(testList.stream().filter(log -> log.getIncidentAircraft() == 1).collect(Collectors.toList()));
+
+        Mockito.when(logRep.findAll()).thenReturn(testList);
     }
 
     @Test
     void insertNewLog() {
-
-
 
         LogService logS = new LogService();
         logS.insertNewLog("Text_Log", new Long(1), Time.valueOf(LocalTime.now()), new Date(), "Test_person");
@@ -64,12 +67,9 @@ class LogServiceTest {
 
     @Test
     void getAllLogs() {
-        //Arrange
-        ArrayList<Log> test = new ArrayList<>();
-        //Act
-        //logS.getAllLogs().forEach(test::add);
-        //Assert
-        assertEquals(5, test.size());
+        List<Log> testList = logService.getAllLogs();
+
+        assertEquals(4, testList.size());
     }
 
     @Test
@@ -84,11 +84,11 @@ class LogServiceTest {
     }
 
     @Test
-    void getAllLogsByincidentFlight(){
+    void getAllLogsByincidentFlight() {
 
         List<Log> listOfLogs = logService.getAllLogsByincidentFlight(Long.valueOf(1));
 
-        assertEquals(3,listOfLogs.size());
+        assertEquals(3, listOfLogs.size());
 
         Mockito.verify(logRep, times(1)).findAllByFlightId(Long.valueOf(1));
     }
