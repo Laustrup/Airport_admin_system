@@ -24,6 +24,10 @@ INSERT INTO gates (gate_number, wake_category, is_available) VALUES
     (25, 2, 0),
     (26, 2, 0);
 
+
+
+
+
 INSERT INTO aircraft_types VALUES
     ('100', 'F100', 'Fokker 100', 1),
     ('141', 'B461', 'BAe 146-100 Pax', 1),
