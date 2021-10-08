@@ -23,6 +23,12 @@ public class Gate {
 
     public Gate() { }
 
+    public Gate(Long number, WakeCategory wakeCategory, boolean isAvailable){
+        this.number = number;
+        this.wakeCategory = wakeCategory;
+        this.isAvailable = isAvailable;
+    }
+
     public Long getNumber() {
         return number;
     }

@@ -49,7 +49,6 @@ public class Log {
         this.flightId = incidentAircraft;
     }
 
-
     public Date getIncidentDate() {
         return incidentDateAndTime;
     }

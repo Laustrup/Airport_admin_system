@@ -1,33 +1,35 @@
 package group_3.airport_admin_system.controllers;
 
+import group_3.airport_admin_system.models.Checklist;
 import group_3.airport_admin_system.models.Log;
+import group_3.airport_admin_system.services.ChecklistService;
+import group_3.airport_admin_system.services.FlightService;
 import group_3.airport_admin_system.services.LogService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
+@RestController
 public class LogController {
 
+    LogService logService;
+
+    public LogController(LogService logService) {
+        this.logService = logService;
+    }
     @GetMapping("/view_logs")
-    public String renderLogs(Model model) {
+    public ResponseEntity<List<Log>> renderLogs(Model model) {
 
-        Iterable<Log> unorderedLogs = new LogService().getAllLogs();
-        ArrayList<Log> logs = new ArrayList<>();
-        LinkedList<Log> logsInOrder = new LinkedList();
+        logService.insertNewLog("Refuelling",Long.valueOf(1),new Date(),"Mechanic");
+        List<Log> logs = logService.getAllLogs();
 
-        for (Log log : unorderedLogs) {
-            logs.add(log);
-        }
-        for (int i = logsInOrder.size(); i > 0;i--) {
-            logsInOrder.add(logs.get(i));
-        }
-
-        model.addAttribute("logs",logsInOrder);
-        model.addAttribute("situation","log");
-
-        return "index.html";
+        return ResponseEntity.ok(logs);
     }
 
 }

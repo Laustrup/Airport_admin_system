@@ -31,12 +31,13 @@ public class ChecklistController {
     }
 
     @GetMapping("/{id}/checklist")
-    public ResponseEntity<Checklist> getChecklist(@PathVariable("id") Long id) {
+    public ResponseEntity<Checklist> getCheckist(@PathVariable("id") Long id) {
 
         Flight flight = flightService.findById(id);
 
-        if (flight == null)
+        if (flight == null) {
             return ResponseEntity.notFound().build();
+        }
 
         Checklist checklist = checklistService.findByFlight(flight);
         logService.insertNewLog("UpdateChecklist",id,new Date(),"Ground_Crew");
