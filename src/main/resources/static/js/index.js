@@ -2,16 +2,22 @@ function updateView(gates, flights) {
     let tableBodyElement = document.querySelector('table.flights tbody');
 
     const gateButtonsHtml = gates.map(gate => {
-        return `<button data-gate-id="${gate.id}" ${gate.is_available ? '' : 'disabled'}>${gate.number}</button>`;
+        return `<button data-gate-number="${gate.number}" ${gate.is_available ? '' : 'disabled'}>${gate.number}</button>`;
     }).join('');
 
+    const humanReadableTime = (time) => {
+        const date = new Date(time);
+        return `${date.getUTCFullYear()}-${('0' + (date.getUTCMonth() + 1)).slice(-2)}-${('0' + date.getUTCDate()).slice(-2)} 
+                ${('0' + date.getUTCHours()).slice(-2)}:${('0' + date.getUTCMinutes()).slice(-2)}`;
+    };
+    
     let html = flights.map(flight => {
         return `
             <tr data-flight-id="${flight.id}">
-                <td></td>
+                <td>${humanReadableTime(flight.flown_at)}</td>
                 <td>${flight.route_number}</td>
-                <td>${flight.origin_airport}</td>
-                <td>${flight.destination_airport}</td>
+                <td>${flight.origin_airport.iata_code}</td>
+                <td>${flight.destination_airport.iata_code}</td>
                 <td>
                     ${gateButtonsHtml}
                 </td>
@@ -45,13 +51,13 @@ function localCache() {
         gates: {
             findAll: () => gates,
             findAllAvailable: () => gates.filter(gate => gate.is_available),
-            findById: id => gates.find(gate => gate.id == id),
-            save: gate => saveData('http://localhost:8080/allGatesInformation', gate)
+            findByNumber: number => gates.find(gate => gate.number == number),
+            save: gate => saveData('http://localhost:8080/gates', gate)
         },
         flights: {
             findAll: () => flights,
             findById: id => flights.find(flight => flight.id == id),
-            save: flight => saveData('http://localhost:8080/allAircraftsInformation', flight)
+            save: flight => saveData('http://localhost:8080/flights', flight)
         },
         checklists: {
             findAll: () => checklists,
@@ -61,7 +67,7 @@ function localCache() {
         },
         fetch: () => {
             return Promise.all([
-                fetch('http://localhost:8080/allGatesInformation')
+                fetch('http://localhost:8080/gates')
                     .then(response => response.json())
                     .then(data => {
                         gates = data;
@@ -78,22 +84,88 @@ function localCache() {
                 //         resolve(data);
                 //     }, 750);
                 // }),
-                fetch('http://localhost:8080/allAircraftsInformation')
-                    .then(response => response.json())
-                    .then(data => { 
-                        flights = data;
-                    })
-                // new Promise((resolve, reject) => {
-                //     setTimeout(() => {
-                //         data = [
-                //             { id: 1, origin_airport: 'ARN', destination_airport: 'CPH', route_number: 'SK 1435' },
-                //             { id: 2, origin_airport: 'CPH', destination_airport: 'ARN', route_number: 'SK 1438' },
-                //             { id: 3, origin_airport: 'OSL', destination_airport: 'CPH', route_number: 'SK 1431' }
-                //         ];
+                // fetch('http://localhost:8080/flights')
+                //     .then(response => response.json())
+                //     .then(data => { 
                 //         flights = data;
-                //         resolve(data);
-                //     }, 750);
-                // }),
+                //     })
+                new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        data = [
+                            {
+                                "id": 1,
+                                "origin_airport": {
+                                    "iata_code": "KRK",
+                                    "city_name": "Krakow (Cracow) - John Paul II International Airport",
+                                    "country_name": "Poland"
+                                },
+                                "destination_airport": {
+                                    "iata_code": "CPH",
+                                    "city_name": "Copenhagen - Copenhagen Airport",
+                                    "country_name": "Denmark"
+                                },
+                                "gate": null,
+                                "flown_at": "2021-10-18T22:10:00.000+00:00",
+                                "route_number": "D8 3563",
+                                "aircraft_type": {
+                                    "icaocode": "B738",
+                                    "iata_code": "73H",
+                                    "icao_code": "B738",
+                                    "model_name": "Boeing 737-800 (winglets) pax",
+                                    "wake_category": "MEDIUM"
+                                }
+                            },
+                            {
+                                "id": 2,
+                                "origin_airport": {
+                                    "iata_code": "AHO",
+                                    "city_name": "Alghero Sassari",
+                                    "country_name": "Italy"
+                                },
+                                "destination_airport": {
+                                    "iata_code": "CPH",
+                                    "city_name": "Copenhagen - Copenhagen Airport",
+                                    "country_name": "Denmark"
+                                },
+                                "gate": null,
+                                "flown_at": "2021-10-18T22:10:00.000+00:00",
+                                "route_number": "JTG360",
+                                "aircraft_type": {
+                                    "icaocode": "B738",
+                                    "iata_code": "73H",
+                                    "icao_code": "B738",
+                                    "model_name": "Boeing 737-800 (winglets) pax",
+                                    "wake_category": "MEDIUM"
+                                }
+                            },
+                            {
+                                "id": 3,
+                                "origin_airport": {
+                                    "iata_code": "ARN",
+                                    "city_name": "Stockholm - Arlanda",
+                                    "country_name": "Sweden"
+                                },
+                                "destination_airport": {
+                                    "iata_code": "CPH",
+                                    "city_name": "Copenhagen - Copenhagen Airport",
+                                    "country_name": "Denmark"
+                                },
+                                "gate": null,
+                                "flown_at": "2021-10-18T22:10:00.000+00:00",
+                                "route_number": "SK 9250",
+                                "aircraft_type": {
+                                    "icaocode": "CRJ9",
+                                    "iata_code": "CR9",
+                                    "icao_code": "CRJ9",
+                                    "model_name": "Canadair Regional Jet 900",
+                                    "wake_category": "MEDIUM"
+                                }
+                            }
+                        ];
+                        flights = data;
+                        resolve(data);
+                    }, 750);
+                })
                 // new Promise((resolve, reject) => {
                 //     setTimeout(() => {
                 //         data = [
@@ -115,21 +187,29 @@ loadingIconElement.hidden = false;
 
 const cache = localCache();
 cache.fetch().then(() => {
-    
+
     loadingIconElement.hidden = true;
-    
+
     updateView(cache.gates.findAll(), cache.flights.findAll());
-    
+
     document.addEventListener('click', (e) => {
-        if (e.target.dataset.gateId) {
-            
+        if (e.target.dataset.gateNumber) {
+
             e.preventDefault();
 
-            let gateId = e.target.dataset.gateId;
-            let gate = cache.gates.findById(gateId);
-            
+            let gateNumber = e.target.dataset.gateNumber;
+            let gate = cache.gates.findByNumber(gateNumber);
+
             gate.is_available = false;
             cache.gates.save(gate);
+
+            let flightId = e.target.closest('tr').dataset.flightId;
+            let flight = cache.flights.findById(flightId);
+
+            flight.gate = gate;
+            cache.flights.save(flight);
+
+            updateView(cache.gates.findAll(), cache.flights.findAll());
         }
     });
 });
