@@ -7,6 +7,7 @@ import group_3.airport_admin_system.services.FlightService;
 import group_3.airport_admin_system.services.LogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class LogController {
 
     LogService logService;

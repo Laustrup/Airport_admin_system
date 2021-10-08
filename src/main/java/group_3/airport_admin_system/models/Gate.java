@@ -1,5 +1,7 @@
 package group_3.airport_admin_system.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,13 +9,16 @@ import javax.persistence.*;
 public class Gate {
 
     @Id
+    @JsonProperty("number")
     @Column(name = "gate_number")
     private Long number;
 
-    @Column(name="wake_category", nullable = false)
+    @JsonProperty("wake_category")
+    @Column(name = "wake_category", nullable = false)
     private WakeCategory wakeCategory;
 
-    @Column( name="is_available", nullable = false)
+    @JsonProperty("is_available")
+    @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
 
     public Gate() { }
