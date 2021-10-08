@@ -72,100 +72,88 @@ function localCache() {
                     .then(data => {
                         gates = data;
                     }),
+                fetch('http://localhost:8080/flights')
+                    .then(response => response.json())
+                    .then(data => {
+                        flights = data;
+                    })
                 // new Promise((resolve, reject) => {
                 //     setTimeout(() => {
                 //         data = [
-                //             { id: 1, number: 1, is_available: true, wake_category: 1 },
-                //             { id: 2, number: 2, is_available: true, wake_category: 1 },
-                //             { id: 3, number: 3, is_available: false, wake_category: 3 },
-                //             { id: 4, number: 4, is_available: true, wake_category: 2 }
+                //             {
+                //                 "id": 1,
+                //                 "origin_airport": {
+                //                     "iata_code": "KRK",
+                //                     "city_name": "Krakow (Cracow) - John Paul II International Airport",
+                //                     "country_name": "Poland"
+                //                 },
+                //                 "destination_airport": {
+                //                     "iata_code": "CPH",
+                //                     "city_name": "Copenhagen - Copenhagen Airport",
+                //                     "country_name": "Denmark"
+                //                 },
+                //                 "gate": null,
+                //                 "flown_at": "2021-10-18T22:10:00.000+00:00",
+                //                 "route_number": "D8 3563",
+                //                 "aircraft_type": {
+                //                     "icaocode": "B738",
+                //                     "iata_code": "73H",
+                //                     "icao_code": "B738",
+                //                     "model_name": "Boeing 737-800 (winglets) pax",
+                //                     "wake_category": "MEDIUM"
+                //                 }
+                //             },
+                //             {
+                //                 "id": 2,
+                //                 "origin_airport": {
+                //                     "iata_code": "AHO",
+                //                     "city_name": "Alghero Sassari",
+                //                     "country_name": "Italy"
+                //                 },
+                //                 "destination_airport": {
+                //                     "iata_code": "CPH",
+                //                     "city_name": "Copenhagen - Copenhagen Airport",
+                //                     "country_name": "Denmark"
+                //                 },
+                //                 "gate": null,
+                //                 "flown_at": "2021-10-18T22:10:00.000+00:00",
+                //                 "route_number": "JTG360",
+                //                 "aircraft_type": {
+                //                     "icaocode": "B738",
+                //                     "iata_code": "73H",
+                //                     "icao_code": "B738",
+                //                     "model_name": "Boeing 737-800 (winglets) pax",
+                //                     "wake_category": "MEDIUM"
+                //                 }
+                //             },
+                //             {
+                //                 "id": 3,
+                //                 "origin_airport": {
+                //                     "iata_code": "ARN",
+                //                     "city_name": "Stockholm - Arlanda",
+                //                     "country_name": "Sweden"
+                //                 },
+                //                 "destination_airport": {
+                //                     "iata_code": "CPH",
+                //                     "city_name": "Copenhagen - Copenhagen Airport",
+                //                     "country_name": "Denmark"
+                //                 },
+                //                 "gate": null,
+                //                 "flown_at": "2021-10-18T22:10:00.000+00:00",
+                //                 "route_number": "SK 9250",
+                //                 "aircraft_type": {
+                //                     "icaocode": "CRJ9",
+                //                     "iata_code": "CR9",
+                //                     "icao_code": "CRJ9",
+                //                     "model_name": "Canadair Regional Jet 900",
+                //                     "wake_category": "MEDIUM"
+                //                 }
+                //             }
                 //         ];
-                //         gates = data;
+                //         flights = data;
                 //         resolve(data);
                 //     }, 750);
-                // }),
-                // fetch('http://localhost:8080/flights')
-                //     .then(response => response.json())
-                //     .then(data => { 
-                //         flights = data;
-                //     })
-                new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        data = [
-                            {
-                                "id": 1,
-                                "origin_airport": {
-                                    "iata_code": "KRK",
-                                    "city_name": "Krakow (Cracow) - John Paul II International Airport",
-                                    "country_name": "Poland"
-                                },
-                                "destination_airport": {
-                                    "iata_code": "CPH",
-                                    "city_name": "Copenhagen - Copenhagen Airport",
-                                    "country_name": "Denmark"
-                                },
-                                "gate": null,
-                                "flown_at": "2021-10-18T22:10:00.000+00:00",
-                                "route_number": "D8 3563",
-                                "aircraft_type": {
-                                    "icaocode": "B738",
-                                    "iata_code": "73H",
-                                    "icao_code": "B738",
-                                    "model_name": "Boeing 737-800 (winglets) pax",
-                                    "wake_category": "MEDIUM"
-                                }
-                            },
-                            {
-                                "id": 2,
-                                "origin_airport": {
-                                    "iata_code": "AHO",
-                                    "city_name": "Alghero Sassari",
-                                    "country_name": "Italy"
-                                },
-                                "destination_airport": {
-                                    "iata_code": "CPH",
-                                    "city_name": "Copenhagen - Copenhagen Airport",
-                                    "country_name": "Denmark"
-                                },
-                                "gate": null,
-                                "flown_at": "2021-10-18T22:10:00.000+00:00",
-                                "route_number": "JTG360",
-                                "aircraft_type": {
-                                    "icaocode": "B738",
-                                    "iata_code": "73H",
-                                    "icao_code": "B738",
-                                    "model_name": "Boeing 737-800 (winglets) pax",
-                                    "wake_category": "MEDIUM"
-                                }
-                            },
-                            {
-                                "id": 3,
-                                "origin_airport": {
-                                    "iata_code": "ARN",
-                                    "city_name": "Stockholm - Arlanda",
-                                    "country_name": "Sweden"
-                                },
-                                "destination_airport": {
-                                    "iata_code": "CPH",
-                                    "city_name": "Copenhagen - Copenhagen Airport",
-                                    "country_name": "Denmark"
-                                },
-                                "gate": null,
-                                "flown_at": "2021-10-18T22:10:00.000+00:00",
-                                "route_number": "SK 9250",
-                                "aircraft_type": {
-                                    "icaocode": "CRJ9",
-                                    "iata_code": "CR9",
-                                    "icao_code": "CRJ9",
-                                    "model_name": "Canadair Regional Jet 900",
-                                    "wake_category": "MEDIUM"
-                                }
-                            }
-                        ];
-                        flights = data;
-                        resolve(data);
-                    }, 750);
-                })
+                // })
                 // new Promise((resolve, reject) => {
                 //     setTimeout(() => {
                 //         data = [
