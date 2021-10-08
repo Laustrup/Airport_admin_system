@@ -67,8 +67,9 @@ public class ATC_Controller {
         }
         taxi.movePlaneToGate(gateNumber,id);
 
-        Flight flight = flightService.findFlightById(id);
 
+        Flight flight = flightService.findFlightById(id);
+        taxi.flightRepository().save(flight);
 
         System.err.println("Flight " + flight.getRouteNumber() + " is taxiing to gate " + gateNumber);
         System.err.println("The flight comes from " + flight.getOriginAirport() + " on the " + flight.getDate());
