@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LogService {
@@ -27,7 +30,13 @@ public class LogService {
         return logRep.findAll();
     }
 
-    public Iterable<Log> getAllLogsByincidentFlight(Long flight){
-        return logRep.findAllByFlightId(flight);
+    public List<Log> getAllLogsByincidentFlight(Long flight){
+        List<Log> allLogsForFlight = new ArrayList<>();
+        logRep.findAllByFlightId(flight).forEach(log -> allLogsForFlight.add(log));
+        return allLogsForFlight;
+    }
+
+    public Optional<Log> getLogById(Long id){
+        return logRep.findById(id);
     }
 }
