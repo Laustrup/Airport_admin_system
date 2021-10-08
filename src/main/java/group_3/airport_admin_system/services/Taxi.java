@@ -40,10 +40,16 @@ public class Taxi {
         Gate gate = gRepo.findById(gateNumber).orElse(null);
 
         // Is gate available, otherwise prompt for new (open)  gatenumber
-        if (gate.isAvailable()) {
-            //
-            taxi(gate, flight);
-            return true;
+        try {
+            assert gate != null;
+            if (gate.isAvailable()) {
+                taxi(gate, flight);
+                return true;
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Couldn't move plane to gate. An error occured, due to something being null. Error is: " + e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
