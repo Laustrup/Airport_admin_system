@@ -53,12 +53,20 @@ public class Log {
         this.flightId = incidentAircraft;
     }
 
-    public Date getIncidentDateAndTime() {
-        return incidentDateAndTime;
+    public Time getIncidentTime() {
+        return incidentTime;
     }
 
-    public void setIncidentDateAndTime(Date incidentDateAndTime) {
-        this.incidentDateAndTime = incidentDateAndTime;
+    public void setIncidentTime(Time incidentTime) {
+        this.incidentTime = incidentTime;
+    }
+
+    public Date getIncidentDate() {
+        return incidentDate;
+    }
+
+    public void setIncidentDate(Date incidentDate) {
+        this.incidentDate = incidentDate;
     }
 
     public String getIncidentResponsible() {

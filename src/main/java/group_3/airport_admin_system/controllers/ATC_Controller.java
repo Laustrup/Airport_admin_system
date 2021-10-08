@@ -57,10 +57,9 @@ public class ATC_Controller {
     public String taxiing(@PathVariable (name = "id") Long id, @RequestParam (name = "gate_number") Long gateNumber){
 
 
-
         taxi.movePlaneToGate(gateNumber,id);
         Optional<Flight> tmpFlight = taxi.flightRepository().findById(id);
-        //logService.insertNewLog("Taxi_To_Gate" , Long.valueOf(tmpFlight.get().getRouteNumber()),new Date(), "ATC");
+        logService.insertNewLog("Taxi_To_Gate" , Long.valueOf(id),Time.valueOf(LocalTime.now()),new Date(2021,10,10), "ATC");
 
         return "redirect:/gates";
     }
@@ -75,7 +74,7 @@ public class ATC_Controller {
         }
         //Small testing of the log system
         logService.insertNewLog("Test1010",new Long(2),Time.valueOf(LocalTime.now()), new Date(),"test");
-        logService.getAllLogs().forEach(log -> System.out.println(log.getIncidentDateAndTime()));
+        logService.getAllLogs().forEach(log -> System.out.println(log.getIncidentTime()));
         return ResponseEntity.status(HttpStatus.OK).body(listOfFlights);
     }
 
